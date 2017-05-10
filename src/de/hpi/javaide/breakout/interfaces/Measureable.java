@@ -1,4 +1,4 @@
-package de.hpi.javaide.breakout;
+package de.hpi.javaide.breakout.interfaces;
 
 /**
  * Measureable objects that have a position (x,y) as well as a width and an height.

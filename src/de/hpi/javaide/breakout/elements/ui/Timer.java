@@ -17,7 +17,7 @@ public class Timer extends UIObject {
 	public void display() {
 		game.fill(255);
 		game.textFont(Font.getFont16());
-		game.text("Time left: " + seconds, game.width-150, game.height-80);
+		game.text("Time left: " + seconds, game.width - 150f, game.height - 80f);
 	}
 
 	@Override

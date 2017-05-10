@@ -1,4 +1,4 @@
-package de.hpi.javaide.breakout;
+package de.hpi.javaide.breakout.interfaces;
 
 import java.awt.Dimension;
 import java.awt.Point;

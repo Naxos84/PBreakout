@@ -1,7 +1,7 @@
 package de.hpi.javaide.breakout.elements;
 
-import de.hpi.javaide.breakout.Displayable;
-import de.hpi.javaide.breakout.Measureable;
+import de.hpi.javaide.breakout.interfaces.Displayable;
+import de.hpi.javaide.breakout.interfaces.Measureable;
 import de.hpi.javaide.breakout.starter.Game;
 
 //TODO hier werden wir sicher eine Collection brauchen um die Bälle unterzubringen.

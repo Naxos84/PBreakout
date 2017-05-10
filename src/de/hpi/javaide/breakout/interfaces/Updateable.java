@@ -1,4 +1,4 @@
-package de.hpi.javaide.breakout;
+package de.hpi.javaide.breakout.interfaces;
 
 /** 
  * Objects that can change their state over time. E.g. color, position, size.... 

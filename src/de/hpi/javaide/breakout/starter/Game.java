@@ -1,19 +1,20 @@
 package de.hpi.javaide.breakout.starter;
 
 import de.hpi.javaide.breakout.basics.Font;
+import de.hpi.javaide.breakout.logging.Log;
 import de.hpi.javaide.breakout.screens.Screen;
 import de.hpi.javaide.breakout.screens.ScreenManager;
 import processing.core.PApplet;
 
 @SuppressWarnings("serial")
-public class Game extends PApplet implements GameConstants {
+public class Game extends PApplet {
 
-	
+
 
 	// Setup the game
 	@Override
 	public void setup() {
-		size(SCREEN_X, SCREEN_Y);
+		size(GameConstants.SCREEN_X, GameConstants.SCREEN_Y);
 		background(0);
 		frameRate(30);
 		Font.init(this);
@@ -47,7 +48,9 @@ public class Game extends PApplet implements GameConstants {
 		case ENTER:
 			ScreenManager.getCurrentScreen().handleKeyPressed(Screen.KEY_ENTER);
 			break;
-		default: System.out.println("key:" + key + "/"); break;
+		default:
+			Log.logDebug("key pressed:" + key + "/");
+			break;
 		}
 	}
 
@@ -56,7 +59,7 @@ public class Game extends PApplet implements GameConstants {
 
 	}
 
-	public void increaseScore(int i) {
+	public void increaseScore(final int i) {
 		ScreenManager.getCurrentScreen().increaseScore(i);
 	}
 }

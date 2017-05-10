@@ -1,6 +1,6 @@
 package de.hpi.javaide.breakout.basics;
 
-import de.hpi.javaide.breakout.Displayable;
+import de.hpi.javaide.breakout.interfaces.Displayable;
 import de.hpi.javaide.breakout.starter.Game;
 
 /**

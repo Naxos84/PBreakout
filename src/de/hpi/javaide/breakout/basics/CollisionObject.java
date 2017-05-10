@@ -4,9 +4,9 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Shape;
 
-import de.hpi.javaide.breakout.Collidable;
-import de.hpi.javaide.breakout.Colorable;
-import de.hpi.javaide.breakout.Displayable;
+import de.hpi.javaide.breakout.interfaces.Collidable;
+import de.hpi.javaide.breakout.interfaces.Colorable;
+import de.hpi.javaide.breakout.interfaces.Displayable;
 import de.hpi.javaide.breakout.starter.Game;
 
 /**

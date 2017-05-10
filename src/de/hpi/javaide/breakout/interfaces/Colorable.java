@@ -1,4 +1,4 @@
-package de.hpi.javaide.breakout;
+package de.hpi.javaide.breakout.interfaces;
 
 /**
  * Interface for all objects that have some sort of color.

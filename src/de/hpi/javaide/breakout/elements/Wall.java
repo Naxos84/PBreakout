@@ -1,9 +1,9 @@
 package de.hpi.javaide.breakout.elements;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
-import de.hpi.javaide.breakout.Displayable;
+import de.hpi.javaide.breakout.interfaces.Displayable;
 import de.hpi.javaide.breakout.starter.Game;
 
 /**
@@ -18,7 +18,7 @@ public class Wall implements Displayable, Iterable<Brick> {
 	/**
 	 * Datastructure to keep the Bricks
 	 */
-	private ArrayList<Brick> wall;
+	private List<Brick> bricks;
 
 
 	public Wall(final Game game, final int i, final int j) {
@@ -26,7 +26,7 @@ public class Wall implements Displayable, Iterable<Brick> {
 	}
 	@Override
 	public Iterator<Brick> iterator() {
-		return wall.iterator();
+		return bricks.iterator();
 	}
 	/**
 	 * Build the wall by putting the single bricks into their position

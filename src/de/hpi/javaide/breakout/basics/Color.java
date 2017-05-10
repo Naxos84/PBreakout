@@ -1,6 +1,6 @@
 package de.hpi.javaide.breakout.basics;
 
-import de.hpi.javaide.breakout.Colorable;
+import de.hpi.javaide.breakout.interfaces.Colorable;
 
 public class Color implements Colorable {
 
