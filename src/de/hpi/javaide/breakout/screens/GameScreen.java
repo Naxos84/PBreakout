@@ -146,4 +146,9 @@ public class GameScreen extends Screen {
 		// (Hint: the update() Method expects an input argument of type String)
 		score.update(String.valueOf(amount));
 	}
+
+	@Override
+	public void handleMouseClick(final int mouseX, final int mouseY) {
+		// do nothing
+	}
 }

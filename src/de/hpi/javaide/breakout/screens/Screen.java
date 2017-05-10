@@ -31,4 +31,6 @@ public abstract class Screen implements Initializable, Displayable, Updateable
 	public abstract void handleMouseDragged();
 
 	public abstract void increaseScore(int amount);
+
+	public abstract void handleMouseClick(int mouseX, int mouseY);
 }

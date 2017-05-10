@@ -1,9 +1,17 @@
 package de.hpi.javaide.breakout.screens;
 
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.List;
+
 import de.hpi.javaide.breakout.basics.UIObject;
+import de.hpi.javaide.breakout.elements.ui.Button;
 import de.hpi.javaide.breakout.elements.ui.Info;
+import de.hpi.javaide.breakout.helper.PointHelper;
 import de.hpi.javaide.breakout.logging.Log;
 import de.hpi.javaide.breakout.starter.Game;
+import de.hpi.javaide.breakout.starter.GameConstants;
 
 /**
  * The Screen can be in three states, either the StartScreen, the GameScreen, or the EndScreen.
@@ -19,9 +27,17 @@ public class StartScreen extends Screen {
 	 */
 	private static Screen instance;
 	private UIObject infoBox;
+	private Button button;
+
+	private final List<String> menuEntries;
 
 	private StartScreen(final Game game){
 		super(game);
+		menuEntries = new ArrayList<>();
+		menuEntries.add("Spiel starten");
+		menuEntries.add("Optionen");
+		menuEntries.add("HighScore");
+		menuEntries.add("Spiel beenden");
 		init();
 	}
 
@@ -59,7 +75,13 @@ public class StartScreen extends Screen {
 		String info = "Press Enter to start!\n";
 		info += "Press Enter to launch the balls\n";
 		infoBox = new Info(gameInstance, info);
+		infoBox.setPosition(new Point(10, 24));
 		infoBox.display();
+
+		button = new Button(gameInstance, 100, 20);
+		button.setPosition(new Point(GameConstants.SCREEN_X / 2, GameConstants.SCREEN_Y / 2));
+		button.update(menuEntries.get(0));
+		button.display();
 	}
 
 	@Override
@@ -72,6 +94,7 @@ public class StartScreen extends Screen {
 	public void display() {
 		Log.logInfo("Hit enter to start");
 		infoBox.display();
+		button.display();
 	}
 
 	@Override
@@ -94,4 +117,14 @@ public class StartScreen extends Screen {
 	public void increaseScore(final int i) {
 		// Im StartScreen gibt es keinen Counter.
 	}
+
+	@Override
+	public void handleMouseClick(final int mouseX, final int mouseY) {
+		if (PointHelper.isInside(new Point(mouseX, mouseY),
+				new Rectangle(button.getPosition().x, button.getPosition().y, button.getWidth(), button.getHeight()))) {
+			Log.logInfo("Button clicked");
+		}
+
+	}
+
 }

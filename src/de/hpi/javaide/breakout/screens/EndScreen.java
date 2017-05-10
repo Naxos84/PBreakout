@@ -92,4 +92,9 @@ public class EndScreen extends Screen {
 	public void increaseScore(final int i) {
 		// There is no counter in the EndScreen
 	}
+
+	@Override
+	public void handleMouseClick(final int mouseX, final int mouseY) {
+		// do nothing
+	}
 }

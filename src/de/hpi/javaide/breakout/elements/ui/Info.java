@@ -16,10 +16,12 @@ public class Info extends UIObject {
 		this.content = content;
 	}
 
+
+
 	@Override
 	public void display() {
 		game.textFont(Font.getFont24());
-		game.text(content, 10, 10);
+		game.text(content, xPosition, yPosition);
 	}
 
 	@Override

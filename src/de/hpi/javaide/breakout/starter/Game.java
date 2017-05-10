@@ -1,10 +1,12 @@
 package de.hpi.javaide.breakout.starter;
 
+
 import de.hpi.javaide.breakout.basics.Font;
 import de.hpi.javaide.breakout.logging.Log;
 import de.hpi.javaide.breakout.screens.Screen;
 import de.hpi.javaide.breakout.screens.ScreenManager;
 import processing.core.PApplet;
+import processing.event.MouseEvent;
 
 @SuppressWarnings("serial")
 public class Game extends PApplet {
@@ -38,6 +40,14 @@ public class Game extends PApplet {
 	@Override
 	public void mouseDragged() {
 		ScreenManager.getCurrentScreen().handleMouseDragged();
+	}
+
+	@Override
+	public void mouseClicked(final MouseEvent event) {
+		if (mouseButton == 37) {
+			Log.logTrace("Left Mouse Button clicked");
+			ScreenManager.getCurrentScreen().handleMouseClick(mouseX, mouseY);
+		}
 	}
 
 	// Interact with the keyboard

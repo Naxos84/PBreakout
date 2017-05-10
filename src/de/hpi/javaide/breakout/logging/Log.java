@@ -1,5 +1,7 @@
 package de.hpi.javaide.breakout.logging;
 
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -12,9 +14,14 @@ import java.util.logging.Logger;
 public class Log {
 
 	private static final Logger l = Logger.getLogger(Log.class.getPackage().getName());
+	static {
+		final Handler h = new ConsoleHandler();
+		h.setLevel(Level.FINEST);
+		l.setLevel(Level.FINEST);
+		l.addHandler(h);
+	}
 
 	private Log() {
-		// prevent instantiation
 	}
 
 	public static void logError(final String message){
