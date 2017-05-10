@@ -7,70 +7,87 @@ public class Color implements Colorable {
 	/**
 	 * the components of the color
 	 */
-	private int r, g, b;
+	private int red;
+	private int green;
+	private int blue;
 
 	/**
 	 * default constructor to create a black color
 	 */
 	public Color() {
-		r = 0;
-		g = 0;
-		b = 0;
+		red = 0;
+		green = 0;
+		blue = 0;
 	}
 
 	/**
 	 * Constructor to create a color with the specified values
-	 * @param r red portion of the color 0-255
-	 * @param g green portion of the color 0-255
-	 * @param b blue portion of the color 0-255
+	 * @param red red portion of the color 0-255
+	 * @param green green portion of the color 0-255
+	 * @param blue blue portion of the color 0-255
 	 */
-	public Color(int r, int g, int b) {
-		this.r = r;
-		this.g = g;
-		this.b = b;
+	public Color(final int red, final int green, final int blue) {
+		if (red < 0 || red > 255) {
+			throw new IllegalArgumentException("The red part of a color can only be between 0 and 255.");
+		} else if (green < 0 || green > 255) {
+			throw new IllegalArgumentException("The green part of a color can only be between 0 and 255.");
+		} else if (blue < 0 || blue > 255) {
+			throw new IllegalArgumentException("The blue part of a color can only be between 0 and 255.");
+		}
+		this.red = red;
+		this.green = green;
+		this.blue = blue;
 	}
 
 	@Override
-	public int getR() {
-		return r;
-	}
-    /**
-     * Set the red component
-     * @param r int 0-255
-     */
-	public void setR(int r) {
-		this.r = r;
-	}
-
-	@Override
-	public int getG() {
-		return g;
-	}
-	/**
-     * Set the green component
-     * @param g int 0-255
-     */
-	public void setG(int g) {
-		this.g = g;
-	}
-
-	@Override
-	public int getB() {
-		return b;
+	public int getRed() {
+		return red;
 	}
 
 	/**
-     * Set the blue components
-     * @param b int 0-255
-     */
-	public void setB(int b) {
-		this.b = b;
+	 * Set the red component
+	 *
+	 * @param red
+	 *            (0-255)
+	 */
+	public void setRed(final int red) {
+		this.red = red;
 	}
 
 	@Override
-	public void setColor(int r, int g, int b) {
-		setR(r);
-		setG(g);
-		setB(b);
+	public int getGreen() {
+		return green;
+	}
+
+	/**
+	 * Set the green component
+	 *
+	 * @param green
+	 *            (0-255)
+	 */
+	public void setGreen(final int green) {
+		this.green = green;
+	}
+
+	@Override
+	public int getBlue() {
+		return blue;
+	}
+
+	/**
+	 * Set the blue components
+	 *
+	 * @param blue
+	 *            (0-255)
+	 */
+	public void setBlue(final int blue) {
+		this.blue = blue;
+	}
+
+	@Override
+	public void setColor(final int red, final int green, final int blue) {
+		setRed(red);
+		setGreen(green);
+		setBlue(blue);
 	}
 }

@@ -13,12 +13,12 @@ public interface Measureable {
 	 * @return the x-position as an integer
 	 */
 	
-	int getX();
+	int getXPosition();
 	/**
 	 * Make sure that measurable objects provide a way to get their y-position.
 	 * @return the y-position as an integer
 	 */
-	int getY();
+	int getYPosition();
 	/**
 	 * Make sure that measurable objects provide a way to get their width.
 	 * 

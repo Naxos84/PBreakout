@@ -21,11 +21,11 @@ public class Paddle extends Rectangular {
 	public void display() {
 		game.rectMode(PApplet.CENTER);
 		game.noStroke();
-		game.fill(getR(), getG(), getB());
-		game.rect(getX(), getY(), getWidth(), getHeight());
+		game.fill(getRed(), getGreen(), getBlue());
+		game.rect(getXPosition(), getYPosition(), getWidth(), getHeight());
 	}
 
 	public void move() {
-		update(new Point(game.mouseX, getY()), new Dimension(getWidth(), getHeight()));
+		update(new Point(game.mouseX, getYPosition()), new Dimension(getWidth(), getHeight()));
 	}
 }

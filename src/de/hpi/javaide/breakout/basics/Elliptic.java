@@ -15,7 +15,7 @@ public abstract class Elliptic extends CollisionObject {
 
 	public Elliptic(Game game, Point position, Dimension dimension) {
 		super(game, position, dimension);
-		geometry = new Ellipse2D.Float(getX(), getY(), getWidth(), getHeight());
+		geometry = new Ellipse2D.Float(getXPosition(), getYPosition(), getWidth(), getHeight());
 	}
 
 	/**
@@ -36,6 +36,6 @@ public abstract class Elliptic extends CollisionObject {
 	@Override
 	public void update(Point position, Dimension dimension) {
 		super.update(position, dimension);
-		((Ellipse2D) this.getGeometry()).setFrame(getX(), getY(), getWidth(), getHeight());
+		((Ellipse2D) this.getGeometry()).setFrame(getXPosition(), getYPosition(), getWidth(), getHeight());
 	}
 }

@@ -12,17 +12,17 @@ public interface Colorable {
 	 * Get the red portion of a color
 	 * @return the red portion of a color as an int within the range of 0 and 255
 	 */
-	int getR();
+	int getRed();
 	/**
 	 * Get the green portion of a color
 	 * @return the green portion of a color as an int within the range of 0 and 255
 	 */
-	int getG();
+	int getGreen();
 	/**
 	 * Get the blue portion of a color
 	 * @return the blue portion of a color as an int within the range of 0 and 255
 	 */
-	int getB();
+	int getBlue();
 
 	/**
 	 * Set a color defined by its red, green, and blue components

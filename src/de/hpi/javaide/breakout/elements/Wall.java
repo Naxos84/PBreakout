@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import de.hpi.javaide.breakout.interfaces.Displayable;
+import de.hpi.javaide.breakout.logging.Log;
 import de.hpi.javaide.breakout.starter.Game;
 
 /**
@@ -12,7 +13,6 @@ import de.hpi.javaide.breakout.starter.Game;
  * @author Ralf Teusner and Tom Staubitz
  *
  */
-//TODO die Wall wird aus Bricks gebaut.
 public class Wall implements Displayable, Iterable<Brick> {
 
 	/**
@@ -22,7 +22,7 @@ public class Wall implements Displayable, Iterable<Brick> {
 
 
 	public Wall(final Game game, final int i, final int j) {
-		// TODO Auto-generated constructor stub
+		buildWall(game, i, j);
 	}
 	@Override
 	public Iterator<Brick> iterator() {
@@ -37,7 +37,7 @@ public class Wall implements Displayable, Iterable<Brick> {
 	 * @param rows
 	 */
 	private void buildWall(final Game game, final int columns, final int rows) {
-
+		Log.logDebug("Building Wall");
 	}
 
 	@Override

@@ -14,13 +14,13 @@ public class BallDepot implements Displayable, Measureable {
 	}
 
 	@Override
-	public int getX() {
+	public int getXPosition() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int getY() {
+	public int getYPosition() {
 		// TODO Auto-generated method stub
 		return 0;
 	}

@@ -22,12 +22,12 @@ public abstract class Rectangular extends CollisionObject {
 	 */
 	public Rectangular(Game game, Point position, Dimension dimension) {
 		super(game, position, dimension);
-		geometry = new Rectangle2D.Float(getX(), getY(), getWidth(), getHeight());
+		geometry = new Rectangle2D.Float(getXPosition(), getYPosition(), getWidth(), getHeight());
 	}
 
 	@Override
 	public void update(Point position, Dimension dimension) {
 		super.update(position, dimension);
-		((Rectangle2D) this.getGeometry()).setFrame(getX(), getY(), getWidth(), getHeight());
+		((Rectangle2D) this.getGeometry()).setFrame(getXPosition(), getYPosition(), getWidth(), getHeight());
 	}
 }

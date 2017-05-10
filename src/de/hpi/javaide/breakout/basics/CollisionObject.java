@@ -62,28 +62,28 @@ public abstract class CollisionObject implements Collidable, Displayable, Colora
 	}
 
 	@Override
-	public int getX() {
+	public int getXPosition() {
 		return position.x;
 	}
 
 	@Override
-	public int getY() {
+	public int getYPosition() {
 		return position.y;
 	}
 
 	@Override
-	public int getR() {
-		return color.getR();
+	public int getRed() {
+		return color.getRed();
 	}
 
 	@Override
-	public int getG() {
-		return color.getG();
+	public int getGreen() {
+		return color.getGreen();
 	}
 
 	@Override
-	public int getB() {
-		return color.getB();
+	public int getBlue() {
+		return color.getBlue();
 	}
 
 	@Override

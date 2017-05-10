@@ -12,7 +12,7 @@ public class Vector {
 	/**
 	 * The PVector object to be wrapped
 	 */
-	private PVector vector;
+	private PVector pVector;
 
 	/**
 	 * Constructor to set the x and the y value of the Vector
@@ -20,38 +20,38 @@ public class Vector {
 	 * @param y float
 	 */
 	public Vector(float x, float y) {
-		vector = new PVector(x, y);
+		pVector = new PVector(x, y);
 	}
 
 	public float getX() {
-		return vector.x;
+		return pVector.x;
 	}
 
 	public float getY() {
-		return vector.y;
+		return pVector.y;
 	}
 
 	public void setX(float x) {
-		vector.x = x;
+		pVector.x = x;
 	}
 
 	public void setY(float y) {
-		vector.y = y;
+		pVector.y = y;
 	}
 	
 	/**
 	 * Multiply the given Vector with the given number
 	 * @param n
 	 */
-	public void mult(float n) {
-		vector.mult(n);
+	public void multiply(float n) {
+		pVector.mult(n);
 	}
 
 	/**
 	 * Normalize the wrapped vector
 	 */
 	public void normalize() {
-		vector.normalize();
+		pVector.normalize();
 	}
 
 }
