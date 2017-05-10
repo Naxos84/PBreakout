@@ -6,9 +6,9 @@ import de.hpi.javaide.breakout.starter.Game;
 
 public class Timer extends UIObject {
 
-	private int seconds;
+	private final int seconds;
 
-	public Timer(Game game) {
+	public Timer(final Game game) {
 		super(game);
 		seconds = 60;
 	}
@@ -18,5 +18,11 @@ public class Timer extends UIObject {
 		game.fill(255);
 		game.textFont(Font.getFont16());
 		game.text("Time left: " + seconds, game.width-150, game.height-80);
+	}
+
+	@Override
+	public void update(final String input) {
+		// TODO Auto-generated method stub
+
 	}
 }

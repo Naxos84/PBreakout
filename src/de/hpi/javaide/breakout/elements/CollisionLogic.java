@@ -15,18 +15,18 @@ public class CollisionLogic {
 	 * - it contains only static methods
 	 */
 	private CollisionLogic() {}
-	
+
 	/**
 	 * This method provides a way to determine if the ball collides with any of the collidable elements on the screen.
 	 * Paddle, Bricks, ...
-	 * 
+	 *
 	 * @param game
 	 * @param ball
 	 * @param paddle
 	 * @param wall
 	 */
-	public static void checkCollision(Game game, Ball ball, Paddle paddle, Wall wall) {
-		todo
+	public static void checkCollision(final Game game, final Ball ball, final Paddle paddle, final Wall wall) {
+		// TODO
 	}
 
 }
