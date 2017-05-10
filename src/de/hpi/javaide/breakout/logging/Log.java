@@ -5,13 +5,13 @@ import java.util.logging.Logger;
 
 /**
  * Basic Logging Implementation
- * 
+ *
  * @author Naxos84
  *
  */
 public class Log {
 
-	private static final Logger l = Logger.getLogger("PBreakOut");
+	private static final Logger l = Logger.getLogger(Log.class.getPackage().getName());
 
 	private Log() {
 		// prevent instantiation
