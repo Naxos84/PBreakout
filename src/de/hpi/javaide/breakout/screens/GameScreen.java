@@ -1,5 +1,7 @@
 package de.hpi.javaide.breakout.screens;
 
+import java.awt.event.KeyEvent;
+
 import de.hpi.javaide.breakout.basics.UIObject;
 import de.hpi.javaide.breakout.elements.Ball;
 import de.hpi.javaide.breakout.elements.BallDepot;
@@ -121,16 +123,27 @@ public class GameScreen extends Screen {
 	 * Take care of keyboard input
 	 */
 	@Override
-	public void handleKeyPressed(final String key) {
+	public void handleKeyPressed(final int key) {
 		switch (key) {
-		case Screen.KEY_ENTER:
-			currentBall = ballDepot.dispense();
+		case KeyEvent.VK_ENTER:
+			spawnBall();
 			break;
-		case Screen.KEY_SPACE:
+		case KeyEvent.VK_SPACE:
+			// TODO check what to do
+			break;
+
 		default:
 			break;
 		}
 	}
+
+
+
+	private void spawnBall() {
+		currentBall = ballDepot.dispense();
+	}
+
+
 
 	/**
 	 * Take care of Mouse input

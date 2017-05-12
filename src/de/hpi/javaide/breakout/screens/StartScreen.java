@@ -2,14 +2,16 @@ package de.hpi.javaide.breakout.screens;
 
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.log4j.Logger;
 
 import de.hpi.javaide.breakout.basics.UIObject;
 import de.hpi.javaide.breakout.elements.ui.Button;
 import de.hpi.javaide.breakout.elements.ui.Info;
 import de.hpi.javaide.breakout.helper.PointHelper;
-import de.hpi.javaide.breakout.logging.Log;
 import de.hpi.javaide.breakout.starter.Game;
 import de.hpi.javaide.breakout.starter.GameConstants;
 
@@ -22,6 +24,8 @@ import de.hpi.javaide.breakout.starter.GameConstants;
  */
 public class StartScreen extends Screen {
 
+	private static final Logger LOGGER = Logger.getLogger(StartScreen.class.getPackage().getName());
+
 	/**
 	 * This variable is needed for the Singleton pattern
 	 */
@@ -30,6 +34,7 @@ public class StartScreen extends Screen {
 	private Button button;
 
 	private final List<String> menuEntries;
+	private int menuSelection = 0;
 
 	private StartScreen(final Game game){
 		super(game);
@@ -72,16 +77,11 @@ public class StartScreen extends Screen {
 	public void init() {
 		gameInstance.noLoop();
 		gameInstance.background(0);
-		String info = "Press Enter to start!\n";
-		info += "Press Enter to launch the balls\n";
+		final String info = "Nutze die Pfeiltasten um im Menü zu navigieren.\nMit Enter bestätigst du deine Auswahl.";
 		infoBox = new Info(gameInstance, info);
 		infoBox.setPosition(new Point(10, 24));
 		infoBox.display();
 
-		button = new Button(gameInstance, 100, 20);
-		button.setPosition(new Point(GameConstants.SCREEN_X / 2, GameConstants.SCREEN_Y / 2));
-		button.update(menuEntries.get(0));
-		button.display();
 	}
 
 	@Override
@@ -92,37 +92,64 @@ public class StartScreen extends Screen {
 
 	@Override
 	public void display() {
-		Log.logInfo("Hit enter to start");
+		LOGGER.info("Hit enter to start");
 		infoBox.display();
-		button.display();
+		drawMenu();
+	}
+
+	private void drawMenu() {
+		for (int i = 0; i < menuEntries.size(); i++) {
+			final String menuEntry = menuEntries.get(i);
+			if (i == menuSelection) {
+				gameInstance.fill(0, 255, 0);
+			} else {
+				gameInstance.fill(255);
+			}
+			gameInstance.text(menuEntry, GameConstants.SCREEN_X / 2f, 200 + 30 * i);
+		}
 	}
 
 	@Override
-	public void handleKeyPressed(final String key) {
+	public void handleKeyPressed(final int key) {
 		switch (key) {
-		case Screen.KEY_ENTER:
-			Log.logDebug("starting..");
+		case KeyEvent.VK_ENTER:
+			LOGGER.debug("starting..");
 			ScreenManager.setScreen(gameInstance, Screen.GAME);
+			break;
+		case KeyEvent.VK_ESCAPE:
+			gameInstance.exit();
+			break;
+		case KeyEvent.VK_UP:
+			LOGGER.debug("Button Up");
+			decreaseMenuSelection();
+			break;
+		case KeyEvent.VK_DOWN:
+			LOGGER.debug("Button Down");
+			increaseMenuSelection();
 			break;
 		default: break;
 		}
 	}
 
-	@Override
-	public void handleMouseDragged() {
-		// Im StartScreen ist keine Interaktion mit der Maus notwendig.
+	private void increaseMenuSelection() {
+		menuSelection++;
+		if (menuSelection >= menuEntries.size()) {
+			menuSelection = 0;
+		}
 	}
 
-	@Override
-	public void increaseScore(final int i) {
-		// Im StartScreen gibt es keinen Counter.
+	private void decreaseMenuSelection() {
+		menuSelection--;
+		if (menuSelection < 0) {
+			menuSelection = menuEntries.size() - 1;
+		}
 	}
 
 	@Override
 	public void handleMouseClick(final int mouseX, final int mouseY) {
 		if (PointHelper.isInside(new Point(mouseX, mouseY),
 				new Rectangle(button.getPosition().x, button.getPosition().y, button.getWidth(), button.getHeight()))) {
-			Log.logInfo("Button clicked");
+			LOGGER.info("Button clicked");
 		}
 
 	}

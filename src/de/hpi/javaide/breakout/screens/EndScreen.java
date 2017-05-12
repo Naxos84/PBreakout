@@ -1,8 +1,11 @@
 package de.hpi.javaide.breakout.screens;
 
+import java.awt.event.KeyEvent;
+
+import org.apache.log4j.Logger;
+
 import de.hpi.javaide.breakout.basics.UIObject;
 import de.hpi.javaide.breakout.elements.ui.Info;
-import de.hpi.javaide.breakout.logging.Log;
 import de.hpi.javaide.breakout.starter.Game;
 
 /**
@@ -13,6 +16,8 @@ import de.hpi.javaide.breakout.starter.Game;
  *
  */
 public class EndScreen extends Screen {
+
+	private static final Logger LOGGER = Logger.getLogger(EndScreen.class.getPackage().getName());
 
 	/**
 	 * This variable is needed for the Singleton pattern
@@ -70,27 +75,24 @@ public class EndScreen extends Screen {
 
 	@Override
 	public void display() {
-		Log.logInfo("Game over: Hit enter to restart.");
+		LOGGER.info("Game over: Hit enter to restart.");
 		infoBox.display();
 	}
 
 	@Override
-	public void handleKeyPressed(final String key) {
+	public void handleKeyPressed(final int key) {
 		switch (key) {
-		case Screen.KEY_ENTER:
-			Log.logInfo("restart..");
+		case KeyEvent.VK_ENTER:
+			LOGGER.info("restart..");
 			ScreenManager.setScreen(gameInstance, Screen.START);
+			break;
+		case KeyEvent.VK_ESCAPE:
+			LOGGER.info("Quitting game...");
+			gameInstance.exit();
+			break;
+		default:
+			break;
 		}
-	}
-
-	@Override
-	public void handleMouseDragged() {
-		// Interaction with the mouse is not necessary in the EndScreen
-	}
-
-	@Override
-	public void increaseScore(final int i) {
-		// There is no counter in the EndScreen
 	}
 
 	@Override

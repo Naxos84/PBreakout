@@ -3,8 +3,9 @@ package de.hpi.javaide.breakout.elements;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import de.hpi.javaide.breakout.interfaces.Displayable;
-import de.hpi.javaide.breakout.logging.Log;
 import de.hpi.javaide.breakout.starter.Game;
 
 /**
@@ -14,6 +15,8 @@ import de.hpi.javaide.breakout.starter.Game;
  *
  */
 public class Wall implements Displayable, Iterable<Brick> {
+
+	private static final Logger LOGGER = Logger.getLogger(Wall.class.getPackage().getName());
 
 	/**
 	 * Datastructure to keep the Bricks
@@ -37,7 +40,7 @@ public class Wall implements Displayable, Iterable<Brick> {
 	 * @param rows
 	 */
 	private void buildWall(final Game game, final int columns, final int rows) {
-		Log.logDebug("Building Wall");
+		LOGGER.debug("Building Wall");
 	}
 
 	@Override

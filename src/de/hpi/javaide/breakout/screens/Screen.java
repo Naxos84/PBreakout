@@ -17,20 +17,19 @@ public abstract class Screen implements Initializable, Displayable, Updateable
 	public static final String GAME = "game";
 	public static final String END = "end";
 
-	public static final String KEY_ENTER = "Enter key pressed";
-	public static final String KEY_SPACE = "Space key pressed";
-
 	protected final Game gameInstance;
 
 	protected Screen(final Game game) {
 		gameInstance = game;
 	}
 
-	public abstract void handleKeyPressed(String key);
+	public abstract void handleKeyPressed(int key);
 
-	public abstract void handleMouseDragged();
+	public void handleMouseDragged() {
+	}
 
-	public abstract void increaseScore(int amount);
+	public void increaseScore(final int amount) {
+	}
 
 	public abstract void handleMouseClick(int mouseX, int mouseY);
 }
