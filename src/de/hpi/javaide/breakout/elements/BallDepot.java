@@ -1,9 +1,11 @@
 package de.hpi.javaide.breakout.elements;
 
+import java.util.Random;
 import de.hpi.javaide.breakout.interfaces.Displayable;
 import de.hpi.javaide.breakout.interfaces.Measureable;
 import de.hpi.javaide.breakout.starter.Game;
 import de.hpi.javaide.breakout.starter.GameConstants;
+import processing.core.PVector;
 
 //TODO hier werden wir sicher eine Collection brauchen um die Bälle unterzubringen.
 //     Vermutlich werden wir wissen wollen wann das Depot leer ist.
@@ -11,9 +13,11 @@ import de.hpi.javaide.breakout.starter.GameConstants;
 public class BallDepot implements Displayable, Measureable {
 
 	private final Game game;
+	private final Random		random;
 
 	public BallDepot(final Game game) {
 		this.game = game;
+		random = new Random();
 	}
 
 	@Override
@@ -52,8 +56,9 @@ public class BallDepot implements Displayable, Measureable {
 	}
 
 	public Ball dispense() {
-		// TODO Auto-generated method stub
-		return new Ball(game, GameConstants.STARTPOSITION);
+		final Ball ball = new Ball(game, GameConstants.STARTPOSITION);
+		final PVector v = new PVector(random.nextInt(10), random.nextInt(10));
+		ball.setVector(v);
+		return ball;
 	}
-
 }
