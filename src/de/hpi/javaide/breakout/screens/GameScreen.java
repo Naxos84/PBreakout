@@ -1,5 +1,6 @@
 package de.hpi.javaide.breakout.screens;
 
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 
 import de.hpi.javaide.breakout.basics.UIObject;
@@ -131,13 +132,28 @@ public class GameScreen extends Screen {
 		case KeyEvent.VK_SPACE:
 			// TODO check what to do
 			break;
-
+		case KeyEvent.VK_LEFT:
+			movePaddleLeft();
+			break;
+		case KeyEvent.VK_RIGHT:
+			movePaddleRight();
+			break;
 		default:
 			break;
 		}
 	}
 
 
+
+	private void movePaddleLeft() {
+		paddle.update(new Point(paddle.getXPosition() - 15, paddle.getYPosition()), paddle.getDimension());
+
+	}
+
+	private void movePaddleRight() {
+		paddle.update(new Point(paddle.getXPosition() + 15, paddle.getYPosition()), paddle.getDimension());
+
+	}
 
 	private void spawnBall() {
 		currentBall = ballDepot.dispense();

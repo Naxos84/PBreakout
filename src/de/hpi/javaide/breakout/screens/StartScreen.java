@@ -1,7 +1,6 @@
 package de.hpi.javaide.breakout.screens;
 
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,9 +8,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import de.hpi.javaide.breakout.basics.UIObject;
-import de.hpi.javaide.breakout.elements.ui.Button;
 import de.hpi.javaide.breakout.elements.ui.Info;
-import de.hpi.javaide.breakout.helper.PointHelper;
 import de.hpi.javaide.breakout.starter.Game;
 import de.hpi.javaide.breakout.starter.GameConstants;
 
@@ -31,7 +28,6 @@ public class StartScreen extends Screen {
 	 */
 	private static Screen instance;
 	private UIObject infoBox;
-	private Button button;
 
 	private final List<String> menuEntries;
 	private int menuSelection = 0;
@@ -75,7 +71,6 @@ public class StartScreen extends Screen {
 	 */
 	@Override
 	public void init() {
-		gameInstance.noLoop();
 		gameInstance.background(0);
 		final String info = "Nutze die Pfeiltasten um im Menü zu navigieren.\nMit Enter bestätigst du deine Auswahl.";
 		infoBox = new Info(gameInstance, info);
@@ -86,13 +81,11 @@ public class StartScreen extends Screen {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-
+		// nothing to update
 	}
 
 	@Override
 	public void display() {
-		LOGGER.info("Hit enter to start");
 		infoBox.display();
 		drawMenu();
 	}
@@ -105,7 +98,9 @@ public class StartScreen extends Screen {
 			} else {
 				gameInstance.fill(255);
 			}
-			gameInstance.text(menuEntry, GameConstants.SCREEN_X / 2f, 200 + 30 * i);
+
+			gameInstance.text(menuEntry, GameConstants.SCREEN_X / 2f, 200f + 30 * i);
+			gameInstance.fill(255);
 		}
 	}
 
@@ -113,11 +108,26 @@ public class StartScreen extends Screen {
 	public void handleKeyPressed(final int key) {
 		switch (key) {
 		case KeyEvent.VK_ENTER:
-			LOGGER.debug("starting..");
-			ScreenManager.setScreen(gameInstance, Screen.GAME);
+			switch (menuSelection) {
+			case 0:
+				startGame();
+				break;
+			case 1:
+				showOptions();
+				break;
+			case 2:
+				showHighScore();
+				break;
+			case 3:
+				exitGame();
+				break;
+			default:
+				break;
+			}
+
 			break;
 		case KeyEvent.VK_ESCAPE:
-			gameInstance.exit();
+			exitGame();
 			break;
 		case KeyEvent.VK_UP:
 			LOGGER.debug("Button Up");
@@ -129,6 +139,24 @@ public class StartScreen extends Screen {
 			break;
 		default: break;
 		}
+	}
+
+	private void exitGame() {
+		gameInstance.exit();
+	}
+
+	private void showHighScore() {
+		// TODO Not implemented yet
+
+	}
+
+	private void showOptions() {
+		// TODO Not implemented yet
+	}
+
+	private void startGame() {
+		LOGGER.debug("starting..");
+		ScreenManager.setScreen(gameInstance, Screen.GAME);
 	}
 
 	private void increaseMenuSelection() {
@@ -147,10 +175,11 @@ public class StartScreen extends Screen {
 
 	@Override
 	public void handleMouseClick(final int mouseX, final int mouseY) {
-		if (PointHelper.isInside(new Point(mouseX, mouseY),
-				new Rectangle(button.getPosition().x, button.getPosition().y, button.getWidth(), button.getHeight()))) {
-			LOGGER.info("Button clicked");
-		}
+		// if (PointHelper.isInside(new Point(mouseX, mouseY),
+		// new Rectangle(button.getPosition().x, button.getPosition().y,
+		// button.getWidth(), button.getHeight()))) {
+		// LOGGER.info("Button clicked");
+		// }
 
 	}
 

@@ -55,7 +55,6 @@ public class Game extends PApplet {
 	@Override
 	public void keyPressed() {
 		ScreenManager.getCurrentScreen().handleKeyPressed(keyCode);
-		LOGGER.debug("key pressed:" + keyCode + "/");
 	}
 
 	@Override

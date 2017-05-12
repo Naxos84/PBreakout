@@ -12,7 +12,7 @@ import de.hpi.javaide.breakout.starter.Game;
 /**
  * Base class to build collidable objects from.
  * Provides the required basis for Elliptics and Rectangulars
- * 
+ *
  * @author Ralf Teusner and Tom Staubitz
  *
  */
@@ -26,11 +26,11 @@ public abstract class CollisionObject implements Collidable, Displayable, Colora
 	 * a reference to the game class to provide access to the processing methods
 	 */
 	protected Game game;
-	/** 
+	/**
 	 * width and height of the object
 	 */
 	protected Dimension dimension;
-	/** 
+	/**
 	 * the x,y position of an object
 	 */
 	protected Point position;
@@ -40,15 +40,15 @@ public abstract class CollisionObject implements Collidable, Displayable, Colora
 	private Color color;
 	/**
 	 * Constructor. Initializes the reference to the Game, the size and the position of the object
-	 * @param game Game, access to the Processing features 
-	 * @param position Position, the x,y coordinates 
+	 * @param game Game, access to the Processing features
+	 * @param position Position, the x,y coordinates
 	 * @param dimension Dimension, the width and height of the object
 	 */
-	public CollisionObject(Game game, Point position, Dimension dimension) {
+	public CollisionObject(final Game game, final Point position, final Dimension dimension) {
 		this.game = game;
 		this.position = position;
 		this.dimension = dimension;
-		this.color = new Color(255, 255, 255);
+		color = new Color(255, 255, 255);
 	}
 
 	@Override
@@ -59,6 +59,10 @@ public abstract class CollisionObject implements Collidable, Displayable, Colora
 	@Override
 	public int getHeight() {
 		return dimension.height;
+	}
+
+	public Dimension getDimension() {
+		return dimension;
 	}
 
 	@Override
@@ -87,17 +91,17 @@ public abstract class CollisionObject implements Collidable, Displayable, Colora
 	}
 
 	@Override
-	public void setColor(int r, int g, int b) {
-		this.color = new Color(r, g, b);
+	public void setColor(final int r, final int g, final int b) {
+		color = new Color(r, g, b);
 	}
 
 	@Override
 	public Shape getGeometry() {
-		return this.geometry;
+		return geometry;
 	}
 
 	@Override
-	public void update(Point position, Dimension dimension) {
+	public void update(final Point position, final Dimension dimension) {
 		this.position = position;
 		this.dimension = dimension;
 	}

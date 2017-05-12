@@ -1,5 +1,8 @@
 package de.hpi.javaide.breakout.elements;
 
+import org.apache.log4j.Logger;
+
+import de.hpi.javaide.breakout.basics.CollisionObject;
 import de.hpi.javaide.breakout.starter.Game;
 import de.hpi.javaide.breakout.starter.GameConstants;
 
@@ -10,17 +13,19 @@ import de.hpi.javaide.breakout.starter.GameConstants;
 //     Tipp: Schleifen könnten sich als hilfreich erweisen.
 public class CollisionLogic {
 
-	/**
-	 * The constructor of this class is private to make sure that it is only used as a static class.
-	 * - it cannot be instantiated,
-	 * - it cannot hold a state,
-	 * - it contains only static methods
-	 */
-	private CollisionLogic() {}
+	private static final Logger LOGGER = Logger.getLogger(CollisionLogic.class.getPackage().getName());
 
 	/**
-	 * This method provides a way to determine if the ball collides with any of the collidable elements on the screen.
-	 * Paddle, Bricks, ...
+	 * The constructor of this class is private to make sure that it is only
+	 * used as a static class. - it cannot be instantiated, - it cannot hold a
+	 * state, - it contains only static methods
+	 */
+	private CollisionLogic() {
+	}
+
+	/**
+	 * This method provides a way to determine if the ball collides with any of
+	 * the collidable elements on the screen. Paddle, Bricks, ...
 	 *
 	 * @param game
 	 * @param ball
@@ -30,9 +35,30 @@ public class CollisionLogic {
 	public static void checkCollision(final Game game, final Ball ball, final Paddle paddle, final Wall wall) {
 		if (ball.getXPosition() <= 0 || ball.getXPosition() >= GameConstants.SCREEN_X) {
 			ball.getVector().x *= -1;
-		} else if (ball.getYPosition() <= 0 || ball.getYPosition() >= GameConstants.SCREEN_Y) {
+		} else if (ball.getYPosition() <= 0) {
 			ball.getVector().y *= -1;
 		}
+		if (hasCollision(ball, paddle)) {
+			LOGGER.info("ball and paddle collided");
+			ball.getVector().y *= -1;
+		}
+
+	}
+
+	private static boolean hasCollision(final CollisionObject o1, final CollisionObject o2) {
+		if (checkX(o1, o2) && checkY(o1, o2)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private static boolean checkX(final CollisionObject o1, final CollisionObject o2) {
+		return o1.getXPosition() >= o2.getXPosition() && o1.getXPosition() <= o2.getXPosition() + o2.getWidth();
+	}
+
+	private static boolean checkY(final CollisionObject o1, final CollisionObject o2) {
+		return o1.getYPosition() >= o2.getYPosition() && o1.getYPosition() <= o2.getYPosition() + o2.getHeight();
 	}
 
 }
