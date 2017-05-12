@@ -5,6 +5,9 @@ import java.awt.Point;
 
 import de.hpi.javaide.breakout.basics.Elliptic;
 import de.hpi.javaide.breakout.starter.Game;
+import de.hpi.javaide.breakout.starter.GameConstants;
+import processing.core.PApplet;
+import processing.core.PVector;
 
 /**
  * Blueprint for a Ball
@@ -19,20 +22,37 @@ import de.hpi.javaide.breakout.starter.Game;
 //     jemand wissen wollen in welche Richtung er fliegt.
 public class Ball extends Elliptic {
 
+	private final int	red		= 255;
+	private final int	green	= 0;
+	private final int	blue	= 0;
+
+	private PVector vector;
+
 	public Ball(final Game game, final Point position) {
 		super(game, position, new Dimension(10, 10));
-
+		vector = new PVector();
+		vector.set(5, 5);
 
 	}
 
 	@Override
 	public void display() {
-		// TODO Auto-generated method stub
-
+		game.fill(red, green, blue);
+		game.ellipseMode(PApplet.CENTER);
+		game.ellipse(position.x, position.y, dimension.width, dimension.height);
+		game.fill(GameConstants.BACKGROUNDFILL);
 	}
 
 	public void move() {
-		// TODO Auto-generated method stub
+		position.x += vector.x;
+		position.y += vector.y;
+	}
 
+	public PVector getVector() {
+		return vector;
+	}
+
+	public void setVector(final PVector newVector) {
+		vector = newVector;
 	}
 }
