@@ -1,5 +1,6 @@
 package de.hpi.javaide.breakout.elements;
 
+import java.awt.Point;
 import java.util.Random;
 
 import de.hpi.javaide.breakout.interfaces.Displayable;
@@ -14,53 +15,66 @@ import processing.core.PVector;
 public class BallDepot implements Displayable, Measureable {
 
 	private final Game game;
-	private final Random		random;
+	private final Random random;
+	private int numberOfBalls;
 
 	public BallDepot(final Game game) {
+		this(game, 3);
+	}
+
+	public BallDepot(final Game game, final int numberOfBalls) {
 		this.game = game;
 		random = new Random();
+		this.numberOfBalls = numberOfBalls;
 	}
 
 	@Override
 	public int getXPosition() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 50;
 	}
 
 	@Override
 	public int getYPosition() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 50;
 	}
 
 	@Override
 	public int getWidth() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int getHeight() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public void display() {
-		// TODO Auto-generated method stub
+		game.fill(255, 0, 0);
+		for (int i = 0; i < numberOfBalls; i++) {
+			game.ellipse(getXPosition() + i * 10, getYPosition(), 5, 5);
 
+		}
+		game.fill(GameConstants.BACKGROUNDFILL);
 	}
 
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return numberOfBalls <= 0;
 	}
 
 	public Ball dispense() {
-		final Ball ball = new Ball(game, GameConstants.STARTPOSITION);
-		final PVector v = new PVector(random.nextInt(GameConstants.SCREEN_X), random.nextInt(GameConstants.SCREEN_Y));
-		v.setMag(ball.getSpeed());
-		ball.setVector(v);
-		return ball;
+		if (numberOfBalls > 0) {
+			final Ball ball = new Ball(game, new Point(GameConstants.SCREEN_X / 2, GameConstants.SCREEN_Y / 2));
+			// final PVector v = new
+			// PVector(random.nextInt(GameConstants.SCREEN_X),
+			// random.nextInt(GameConstants.SCREEN_Y));
+			final PVector v = new PVector(1, 1);
+			v.setMag(ball.getSpeed());
+			ball.setVector(v);
+			numberOfBalls--;
+			return ball;
+		} else {
+			return null;
+		}
 	}
 }

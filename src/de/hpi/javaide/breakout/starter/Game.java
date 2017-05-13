@@ -1,6 +1,5 @@
 package de.hpi.javaide.breakout.starter;
 
-
 import org.apache.log4j.Logger;
 
 import de.hpi.javaide.breakout.basics.Font;
@@ -28,8 +27,8 @@ public class Game extends PApplet {
 	@Override
 	public void draw() {
 		background(0);
-		ScreenManager.getCurrentScreen().display();
 		ScreenManager.getCurrentScreen().update();
+		ScreenManager.getCurrentScreen().display();
 	}
 
 	// Interact with the mouse

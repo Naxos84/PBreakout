@@ -1,9 +1,8 @@
 package de.hpi.javaide.breakout.elements;
 
-import java.awt.Dimension;
 import java.awt.Point;
 
-import de.hpi.javaide.breakout.basics.Elliptic;
+import de.hpi.javaide.breakout.basics.Circle;
 import de.hpi.javaide.breakout.starter.Game;
 import de.hpi.javaide.breakout.starter.GameConstants;
 import processing.core.PApplet;
@@ -15,24 +14,24 @@ import processing.core.PVector;
  * @author Ralf Teusner and Tom Staubitz
  *
  */
-//TODO neben dem Ergänzen der vom Interface erwarteten Methoden,
-//     sollte der Ball Eigenschaften wie Größe und Richtung mitbringen.
-//     Richtung wird in der Regel als Vector definiert.
-//     Vermutlich sollte er die Richtung ändern können und sehr wahrscheinlich wird früher oder später
-//     jemand wissen wollen in welche Richtung er fliegt.
-public class Ball extends Elliptic {
+// TODO neben dem Ergänzen der vom Interface erwarteten Methoden,
+// sollte der Ball Eigenschaften wie Größe und Richtung mitbringen.
+// Richtung wird in der Regel als Vector definiert.
+// Vermutlich sollte er die Richtung ändern können und sehr wahrscheinlich
+// wird früher oder später
+// jemand wissen wollen in welche Richtung er fliegt.
+public class Ball extends Circle {
 
-	private static final int RADIUS = 10;
 	private static final int SPEED = 3;
 
-	private final int	red		= 255;
-	private final int	green	= 0;
-	private final int	blue	= 0;
+	private final int red = 255;
+	private final int green = 0;
+	private final int blue = 0;
 
 	private PVector vector;
 
 	public Ball(final Game game, final Point position) {
-		super(game, position, new Dimension(RADIUS, RADIUS));
+		super(game, position, 10);
 		vector = new PVector();
 		vector.set(1, 1);
 
@@ -42,7 +41,7 @@ public class Ball extends Elliptic {
 	public void display() {
 		game.fill(red, green, blue);
 		game.ellipseMode(PApplet.CENTER);
-		game.ellipse(position.x, position.y, RADIUS, RADIUS);
+		game.ellipse(position.x, position.y, getRadius(), getRadius());
 		game.fill(GameConstants.BACKGROUNDFILL);
 	}
 
@@ -61,10 +60,6 @@ public class Ball extends Elliptic {
 
 	public void bounceX() {
 		vector.x *= -1;
-	}
-
-	public int getRadius() {
-		return RADIUS;
 	}
 
 	public float getSpeed() {

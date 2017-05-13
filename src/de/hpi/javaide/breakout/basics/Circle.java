@@ -11,31 +11,38 @@ import de.hpi.javaide.breakout.starter.Game;
  * @author Ralf Teusner and Tom Staubitz
  *
  */
-public abstract class Elliptic extends CollisionObject {
+public abstract class Circle extends CollisionObject {
 
-	public Elliptic(Game game, Point position, Dimension dimension) {
-		super(game, position, dimension);
-		geometry = new Ellipse2D.Float(getXPosition(), getYPosition(), getWidth(), getHeight());
+	private final int radius;
+
+	public Circle(final Game game, final Point position, final int radius) {
+		super(game, position, new Dimension(radius, radius));
+		this.radius = radius;
+		geometry = new Ellipse2D.Float(getXPosition(), getYPosition(), radius, radius);
 	}
 
 	/**
 	 * Constructor to create the basis for a round object
-	 * 
+	 *
 	 * @param game Game reference to the game that provides access to the Processing features
 	 * @param position Position x,y position of the Object
 	 * @param dimension
 	 */
-	public Elliptic(Game game) {
-		this(game, new Point(0, 0), new Dimension(10, 10));
+	public Circle(final Game game) {
+		this(game, new Point(0, 0), 10);
 	}
-	
+
 	/**
 	 * Default constructor to create a round object with a size 10,10 at the top left corner of the screen.
 	 * @param game Game
 	 */
 	@Override
-	public void update(Point position, Dimension dimension) {
+	public void update(final Point position, final Dimension dimension) {
 		super.update(position, dimension);
-		((Ellipse2D) this.getGeometry()).setFrame(getXPosition(), getYPosition(), getWidth(), getHeight());
+		((Ellipse2D) getGeometry()).setFrame(getXPosition(), getYPosition(), getWidth(), getHeight());
+	}
+
+	public int getRadius() {
+		return radius;
 	}
 }

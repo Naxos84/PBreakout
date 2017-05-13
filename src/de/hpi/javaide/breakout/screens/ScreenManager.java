@@ -4,7 +4,7 @@ import de.hpi.javaide.breakout.starter.Game;
 
 /**
  * Provides functionality to switch between the screens
- * 
+ *
  * @author Ralf Teusner and Tom Staubitz
  *
  */
@@ -20,11 +20,14 @@ public class ScreenManager {
 
 	/**
 	 * Switch between the screens
-	 * 
-	 * @param game Game a reference to access the Processing features
-	 * @param type String the type of screen to be switched to (StartScreen, GameScreen, EndScreen)
+	 *
+	 * @param game
+	 *            Game a reference to access the Processing features
+	 * @param type
+	 *            String the type of screen to be switched to (StartScreen,
+	 *            GameScreen, EndScreen)
 	 */
-	public static void setScreen(Game game, String type) {
+	public static void setScreen(final Game game, final String type) {
 		switch (type) {
 		case Screen.START:
 			currentScreen = StartScreen.getInstance(game);
@@ -36,11 +39,12 @@ public class ScreenManager {
 			currentScreen = EndScreen.getInstance(game);
 			break;
 		}
+		currentScreen.init();
 	}
 
 	/**
 	 * Getter to access the currently active Screen
-	 * 
+	 *
 	 * @return Screen the currently active Screen
 	 */
 	public static Screen getCurrentScreen() {

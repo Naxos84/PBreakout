@@ -2,6 +2,8 @@ package de.hpi.javaide.breakout.screens;
 
 import java.awt.event.KeyEvent;
 
+import org.apache.log4j.Logger;
+
 import de.hpi.javaide.breakout.basics.UIObject;
 import de.hpi.javaide.breakout.elements.Ball;
 import de.hpi.javaide.breakout.elements.BallDepot;
@@ -13,23 +15,27 @@ import de.hpi.javaide.breakout.elements.ui.Timer;
 import de.hpi.javaide.breakout.starter.Game;
 
 /**
- * The Screen can be in three states, either the StartScreen, the GameScreen, or the EndScreen.
- * The game logic takes care, which of those is the currently active screen.
+ * The Screen can be in three states, either the StartScreen, the GameScreen, or
+ * the EndScreen. The game logic takes care, which of those is the currently
+ * active screen.
  *
  * @author Ralf Teusner and Tom Staubitz
  *
  */
 public class GameScreen extends Screen {
 
+	private static final Logger LOGGER = Logger.getLogger(Game.class.getPackage().getName());
+
 	/**
 	 * This variable is needed for the Singleton pattern
 	 */
-	private static Screen instance;
+	private static GameScreen instance;
 
 	/**
-	 * As we are in the actual game now, we need all the elements that are part of the game.
-	 * Such as the BallDepot (containing the Balls), the currentBall (the BallDepot dispenses the one Ball after the other to this variable),
-	 * the Paddle, and the Wall (containing all the Bricks)
+	 * As we are in the actual game now, we need all the elements that are part
+	 * of the game. Such as the BallDepot (containing the Balls), the
+	 * currentBall (the BallDepot dispenses the one Ball after the other to this
+	 * variable), the Paddle, and the Wall (containing all the Bricks)
 	 */
 	private BallDepot ballDepot;
 	private Ball currentBall;
@@ -49,31 +55,32 @@ public class GameScreen extends Screen {
 	}
 
 	/**
-	 * GameScreen implements a "Lazy Instantiation" of the Singleton Design Patterns (Gang of Four)
-	 * This approach is not "Thread safe", but is sufficient for our current needs.
+	 * GameScreen implements a "Lazy Instantiation" of the Singleton Design
+	 * Patterns (Gang of Four) This approach is not "Thread safe", but is
+	 * sufficient for our current needs.
 	 *
-	 * Please, be aware that Singletons need to be handled with care.
-	 * There are various ways to implement them, all have there pros and cons.
-	 * In his book, Effective Java, Joshua Bloch recommends to create Singletons using an enum,
-	 * which is a language concept that we have not discussed here so far.
-	 * For those of you who want to go further we suggest to follow this recommendation at some point of time.
+	 * Please, be aware that Singletons need to be handled with care. There are
+	 * various ways to implement them, all have there pros and cons. In his
+	 * book, Effective Java, Joshua Bloch recommends to create Singletons using
+	 * an enum, which is a language concept that we have not discussed here so
+	 * far. For those of you who want to go further we suggest to follow this
+	 * recommendation at some point of time.
 	 *
 	 * @return the EndScreen
 	 */
-	public static Screen getInstance(final Game game) {
+	public static GameScreen getInstance(final Game game) {
 		if (instance == null) {
 			instance = new GameScreen(game);
-		} else {
-			instance.init();
 		}
 		return instance;
 	}
 
 	/*
-	 * Hint for the following error messages:
-	 * rather consider to create the necessary constructors than to remove the arguments.
+	 * Hint for the following error messages: rather consider to create the
+	 * necessary constructors than to remove the arguments.
 	 *
 	 * (non-Javadoc)
+	 *
 	 * @see de.hpi.javaide.breakout.Initializable#init()
 	 */
 	@Override
@@ -99,8 +106,8 @@ public class GameScreen extends Screen {
 	}
 
 	/**
-	 * Display the updated state of the Game Screen x times per second
-	 * Just delegate to the display Methods of the Objects to be displayed.
+	 * Display the updated state of the Game Screen x times per second Just
+	 * delegate to the display Methods of the Objects to be displayed.
 	 */
 	@Override
 	public void display() {
@@ -128,9 +135,6 @@ public class GameScreen extends Screen {
 		case KeyEvent.VK_ENTER:
 			spawnBall();
 			break;
-		case KeyEvent.VK_SPACE:
-			// TODO check what to do
-			break;
 		case KeyEvent.VK_LEFT:
 			movePaddleLeft();
 			break;
@@ -142,8 +146,6 @@ public class GameScreen extends Screen {
 		}
 	}
 
-
-
 	private void movePaddleLeft() {
 		paddle.moveRight();
 	}
@@ -154,10 +156,13 @@ public class GameScreen extends Screen {
 	}
 
 	private void spawnBall() {
-		currentBall = ballDepot.dispense();
+		if (currentBall == null) {
+			LOGGER.debug("Spawning new ball");
+			currentBall = ballDepot.dispense();
+		} else {
+			LOGGER.info("Cannot spawn new ball, cause there is already an existing ball");
+		}
 	}
-
-
 
 	/**
 	 * Take care of Mouse input
@@ -177,5 +182,9 @@ public class GameScreen extends Screen {
 	@Override
 	public void handleMouseClick(final int mouseX, final int mouseY) {
 		// do nothing
+	}
+
+	public static void destroyCurrentBall(final Game game) {
+		getInstance(game).currentBall = null;
 	}
 }

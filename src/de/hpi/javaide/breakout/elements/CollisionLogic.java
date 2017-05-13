@@ -2,7 +2,9 @@ package de.hpi.javaide.breakout.elements;
 
 import org.apache.log4j.Logger;
 
-import de.hpi.javaide.breakout.basics.CollisionObject;
+import de.hpi.javaide.breakout.basics.Circle;
+import de.hpi.javaide.breakout.basics.Rectangular;
+import de.hpi.javaide.breakout.screens.GameScreen;
 import de.hpi.javaide.breakout.starter.Game;
 import de.hpi.javaide.breakout.starter.GameConstants;
 import processing.core.PApplet;
@@ -35,65 +37,90 @@ public class CollisionLogic {
 	 */
 	public static void checkCollision(final Game game, final Ball ball, final Paddle paddle, final Wall wall) {
 		LOGGER.trace("Checking collisions");
-		if (ball.getXPosition() <= 0 || ball.getXPosition() >= GameConstants.SCREEN_X) {
+		if (ball.getXPosition() - ball.getRadius() < 0 || ball.getXPosition() + ball.getRadius() > GameConstants.SCREEN_X) {
+			LOGGER.debug("Collision with side wall");
 			ball.bounceX();
-		} else if (ball.getYPosition() <= 0 || ball.getYPosition() >= GameConstants.SCREEN_Y) {
+		} else if (ball.getYPosition() - ball.getRadius() < 0) {
+			LOGGER.debug("Collision with top wall");
 			ball.bounceY();
+		} else if (ball.getYPosition() + ball.getRadius() > GameConstants.SCREEN_Y) {
+			GameScreen.destroyCurrentBall(game);
 		}
-		if (checkBallPaddleCollision(ball, paddle)) {
-
+		switch (checkCircelRectangleCollision(ball, paddle)) {
+		case HORIZONTAL:
 			ball.bounceY();
+			break;
+		case VERTICAL:
+			ball.bounceX();
+			break;
+		case NONE:
+		default:
+			break;
 		}
 
 	}
 
-	private static boolean checkBallPaddleCollision(final Ball ball, final Paddle paddle) {
+	private static RectangularEdge checkCircelRectangleCollision(final Circle circle, final Rectangular rect) {
 		// Collision logic taken from
 		// http://www.jeffreythompson.org/collision-detection/circle-rect.php
-		int testX = ball.getXPosition();
-		int testY = ball.getYPosition();
+		int testX = circle.getXPosition();
+		int testY = circle.getYPosition();
+		RectangularEdge collidedRectEdge = RectangularEdge.NONE;
 
-		if (ball.getXPosition() < paddle.getXPosition()) {
-			testX = paddle.getXPosition(); // left edge
-		} else if (ball.getXPosition() > paddle.getXPosition() + paddle.getWidth()) {
-			testX = paddle.getXPosition() + paddle.getWidth(); // right edge
+		if (circle.getXPosition() < rect.getXPosition()) {
+			testX = rect.getXPosition(); // left edge
+			collidedRectEdge = RectangularEdge.VERTICAL;
+		} else if (circle.getXPosition() > rect.getXPosition() + rect.getWidth()) {
+			testX = rect.getXPosition() + rect.getWidth(); // right edge
+			collidedRectEdge = RectangularEdge.VERTICAL;
 		}
 
-		if (ball.getYPosition() < paddle.getYPosition()) {
-			testY = paddle.getYPosition(); // top edge
-		} else if (ball.getYPosition() > paddle.getXPosition() + paddle.getHeight()) {
-			testY = paddle.getYPosition() + paddle.getHeight(); // bottom edge
+		if (circle.getYPosition() < rect.getYPosition()) {
+			testY = rect.getYPosition(); // top edge
+			collidedRectEdge = RectangularEdge.HORIZONTAL;
+		} else if (circle.getYPosition() > rect.getXPosition() + rect.getHeight()) {
+			testY = rect.getYPosition() + rect.getHeight(); // bottom edge
+			collidedRectEdge = RectangularEdge.HORIZONTAL;
 		}
 
-		final int distX = ball.getXPosition() - testX;
-		final int distY = ball.getYPosition() - testY;
+		final int distX = circle.getXPosition() - testX;
+		final int distY = circle.getYPosition() - testY;
 
-		final float distance = PApplet.sqrt((distX * distX) + (distY * distY));
+		final float distance = PApplet.sqrt((float) (distX * distX) + (distY * distY));
 
-		if (distance < ball.getRadius()) {
-			LOGGER.debug("ball and paddle collided");
-			LOGGER.debug("distance: " + distance + " radius: " + ball.getRadius());
-			return true;
+		if (distance < circle.getRadius()) {
+			LOGGER.debug("ball and paddle collided --> " + collidedRectEdge);
+			LOGGER.debug("distance: " + distance + " radius: " + circle.getRadius());
+			return collidedRectEdge;
 		}
-		return false;
+		return RectangularEdge.NONE;
 
 	}
 
-	private static boolean hasCollision(final CollisionObject o1, final CollisionObject o2) {
-		if (checkX(o1, o2) && checkY(o1, o2)) {
-			LOGGER.debug(o1 + "collided with" + o2);
-			return true;
-		} else {
-			return false;
-		}
-	}
+	// private static boolean hasCollision(final CollisionObject o1, final
+	// CollisionObject o2) {
+	// if (checkX(o1, o2) && checkY(o1, o2)) {
+	// LOGGER.debug(o1 + "collided with" + o2);
+	// return true;
+	// } else {
+	// return false;
+	// }
+	// }
+	//
+	// private static boolean checkX(final CollisionObject o1, final
+	// CollisionObject o2) {
+	// return o1.getXPosition() >= o2.getXPosition() && o1.getXPosition() <=
+	// o2.getXPosition() + o2.getWidth();
+	// }
+	//
+	// private static boolean checkY(final CollisionObject o1, final
+	// CollisionObject o2) {
+	// return o1.getYPosition() >= o2.getYPosition() && o1.getYPosition() <=
+	// o2.getYPosition() + o2.getHeight();
+	// }
 
-	private static boolean checkX(final CollisionObject o1, final CollisionObject o2) {
-		return o1.getXPosition() >= o2.getXPosition() && o1.getXPosition() <= o2.getXPosition() + o2.getWidth();
-	}
-
-	private static boolean checkY(final CollisionObject o1, final CollisionObject o2) {
-		return o1.getYPosition() >= o2.getYPosition() && o1.getYPosition() <= o2.getYPosition() + o2.getHeight();
+	private enum RectangularEdge {
+		HORIZONTAL(), VERTICAL(), NONE();
 	}
 
 }
