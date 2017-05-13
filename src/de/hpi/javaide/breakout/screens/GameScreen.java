@@ -1,6 +1,5 @@
 package de.hpi.javaide.breakout.screens;
 
-import java.awt.Point;
 import java.awt.event.KeyEvent;
 
 import de.hpi.javaide.breakout.basics.UIObject;
@@ -146,12 +145,11 @@ public class GameScreen extends Screen {
 
 
 	private void movePaddleLeft() {
-		paddle.update(new Point(paddle.getXPosition() - 15, paddle.getYPosition()), paddle.getDimension());
-
+		paddle.moveRight();
 	}
 
 	private void movePaddleRight() {
-		paddle.update(new Point(paddle.getXPosition() + 15, paddle.getYPosition()), paddle.getDimension());
+		paddle.moveRight();
 
 	}
 

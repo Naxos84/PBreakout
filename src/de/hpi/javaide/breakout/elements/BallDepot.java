@@ -1,6 +1,7 @@
 package de.hpi.javaide.breakout.elements;
 
 import java.util.Random;
+
 import de.hpi.javaide.breakout.interfaces.Displayable;
 import de.hpi.javaide.breakout.interfaces.Measureable;
 import de.hpi.javaide.breakout.starter.Game;
@@ -57,7 +58,9 @@ public class BallDepot implements Displayable, Measureable {
 
 	public Ball dispense() {
 		final Ball ball = new Ball(game, GameConstants.STARTPOSITION);
-		final PVector v = new PVector(random.nextInt(10), random.nextInt(10));
+		// final PVector v = new PVector(random.nextInt(10),
+		// random.nextInt(10));
+		final PVector v = new PVector(0, 3);
 		ball.setVector(v);
 		return ball;
 	}

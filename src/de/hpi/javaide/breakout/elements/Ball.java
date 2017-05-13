@@ -22,6 +22,8 @@ import processing.core.PVector;
 //     jemand wissen wollen in welche Richtung er fliegt.
 public class Ball extends Elliptic {
 
+	private static final int RADIUS = 10;
+
 	private final int	red		= 255;
 	private final int	green	= 0;
 	private final int	blue	= 0;
@@ -29,9 +31,9 @@ public class Ball extends Elliptic {
 	private PVector vector;
 
 	public Ball(final Game game, final Point position) {
-		super(game, position, new Dimension(10, 10));
+		super(game, position, new Dimension(RADIUS, RADIUS));
 		vector = new PVector();
-		vector.set(5, 5);
+		vector.set(1, 1);
 
 	}
 
@@ -39,7 +41,7 @@ public class Ball extends Elliptic {
 	public void display() {
 		game.fill(red, green, blue);
 		game.ellipseMode(PApplet.CENTER);
-		game.ellipse(position.x, position.y, dimension.width, dimension.height);
+		game.ellipse(position.x, position.y, RADIUS, RADIUS);
 		game.fill(GameConstants.BACKGROUNDFILL);
 	}
 
@@ -48,11 +50,19 @@ public class Ball extends Elliptic {
 		position.y += vector.y;
 	}
 
-	public PVector getVector() {
-		return vector;
-	}
-
 	public void setVector(final PVector newVector) {
 		vector = newVector;
+	}
+
+	public void bounceY() {
+		vector.y *= -1;
+	}
+
+	public void bounceX() {
+		vector.x *= -1;
+	}
+
+	public int getRadius() {
+		return RADIUS;
 	}
 }

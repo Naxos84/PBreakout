@@ -70,9 +70,17 @@ public abstract class CollisionObject implements Collidable, Displayable, Colora
 		return position.x;
 	}
 
+	protected void setXPosition(final int x) {
+		position.x = x;
+	}
+
 	@Override
 	public int getYPosition() {
 		return position.y;
+	}
+
+	protected void setYPosition(final int y) {
+		position.y = y;
 	}
 
 	@Override
