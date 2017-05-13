@@ -58,9 +58,8 @@ public class BallDepot implements Displayable, Measureable {
 
 	public Ball dispense() {
 		final Ball ball = new Ball(game, GameConstants.STARTPOSITION);
-		// final PVector v = new PVector(random.nextInt(10),
-		// random.nextInt(10));
-		final PVector v = new PVector(0, 3);
+		final PVector v = new PVector(random.nextInt(GameConstants.SCREEN_X), random.nextInt(GameConstants.SCREEN_Y));
+		v.setMag(ball.getSpeed());
 		ball.setVector(v);
 		return ball;
 	}

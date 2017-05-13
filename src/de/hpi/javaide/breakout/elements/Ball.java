@@ -23,6 +23,7 @@ import processing.core.PVector;
 public class Ball extends Elliptic {
 
 	private static final int RADIUS = 10;
+	private static final int SPEED = 3;
 
 	private final int	red		= 255;
 	private final int	green	= 0;
@@ -64,5 +65,9 @@ public class Ball extends Elliptic {
 
 	public int getRadius() {
 		return RADIUS;
+	}
+
+	public float getSpeed() {
+		return SPEED;
 	}
 }
