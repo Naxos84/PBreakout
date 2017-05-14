@@ -1,5 +1,7 @@
 package de.hpi.javaide.breakout.elements;
 
+import java.util.Iterator;
+
 import org.apache.log4j.Logger;
 
 import de.hpi.javaide.breakout.basics.Circle;
@@ -38,12 +40,13 @@ public class CollisionLogic {
 	public static void checkCollision(final Game game, final Ball ball, final Paddle paddle, final Wall wall) {
 		LOGGER.trace("Checking collisions");
 		if (ball.getXPosition() - ball.getRadius() < 0 || ball.getXPosition() + ball.getRadius() > GameConstants.SCREEN_X) {
-			LOGGER.debug("Collision with side wall");
+			LOGGER.debug("Collision with side wall. BallX = " + ball.getXPosition());
 			ball.bounceX();
 		} else if (ball.getYPosition() - ball.getRadius() < 0) {
-			LOGGER.debug("Collision with top wall");
+			LOGGER.debug("Collision with top wall. BallY = " + ball.getYPosition());
 			ball.bounceY();
 		} else if (ball.getYPosition() + ball.getRadius() > GameConstants.SCREEN_Y) {
+			LOGGER.debug("Ball fell down.");
 			GameScreen.destroyCurrentBall(game);
 		}
 		switch (checkCircelRectangleCollision(ball, paddle)) {
@@ -57,15 +60,18 @@ public class CollisionLogic {
 		default:
 			break;
 		}
-		for (final Brick brick : wall) {
+		for (final Iterator<Brick> iterator = wall.iterator(); iterator.hasNext();) {
+			final Brick brick = iterator.next();
 			switch (checkCircelRectangleCollision(ball, brick)) {
 			case HORIZONTAL:
 				ball.bounceY();
 				brick.onHit();
+				iterator.remove();
 				break;
 			case VERTICAL:
 				ball.bounceX();
 				brick.onHit();
+				iterator.remove();
 				break;
 			case NONE:
 			default:
@@ -78,6 +84,7 @@ public class CollisionLogic {
 	private static RectangularEdge checkCircelRectangleCollision(final Circle circle, final Rectangular rect) {
 		// Collision logic taken from
 		// http://www.jeffreythompson.org/collision-detection/circle-rect.php
+		LOGGER.trace("Checking Collistion between " + circle + " and " + rect);
 		int testX = circle.getXPosition();
 		int testY = circle.getYPosition();
 		RectangularEdge collidedRectEdge = RectangularEdge.NONE;
@@ -85,26 +92,35 @@ public class CollisionLogic {
 		if (circle.getXPosition() < rect.getXPosition()) {
 			testX = rect.getXPosition(); // left edge
 			collidedRectEdge = RectangularEdge.VERTICAL;
+			LOGGER.trace("Collision could be left edge");
 		} else if (circle.getXPosition() > rect.getXPosition() + rect.getWidth()) {
 			testX = rect.getXPosition() + rect.getWidth(); // right edge
 			collidedRectEdge = RectangularEdge.VERTICAL;
+			LOGGER.trace("Collision could be right edge");
 		}
 
 		if (circle.getYPosition() < rect.getYPosition()) {
 			testY = rect.getYPosition(); // top edge
 			collidedRectEdge = RectangularEdge.HORIZONTAL;
+			LOGGER.trace("Collision could be top edge");
 		} else if (circle.getYPosition() > rect.getXPosition() + rect.getHeight()) {
 			testY = rect.getYPosition() + rect.getHeight(); // bottom edge
 			collidedRectEdge = RectangularEdge.HORIZONTAL;
+			LOGGER.trace("Collision could be bottom edge");
 		}
 
+		LOGGER.trace("testX: " + testX);
+		LOGGER.trace("testY: " + testY);
+
 		final int distX = circle.getXPosition() - testX;
+		LOGGER.trace("distX: " + distX);
 		final int distY = circle.getYPosition() - testY;
+		LOGGER.trace("distY " + distY);
 
 		final float distance = PApplet.sqrt((float) (distX * distX) + (distY * distY));
 
 		if (distance < circle.getRadius()) {
-			LOGGER.debug("ball and paddle collided --> " + collidedRectEdge);
+			LOGGER.debug(circle + " and " + rect + " collided --> " + collidedRectEdge);
 			LOGGER.debug("distance: " + distance + " radius: " + circle.getRadius());
 			return collidedRectEdge;
 		}

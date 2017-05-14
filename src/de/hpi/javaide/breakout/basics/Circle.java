@@ -7,7 +7,9 @@ import java.awt.geom.Ellipse2D;
 import de.hpi.javaide.breakout.starter.Game;
 
 /**
- * Extends the CollisionObject to provide the basis for the round collidable Elements, such as the Ball
+ * Extends the CollisionObject to provide the basis for the round collidable
+ * Elements, such as the Ball
+ * 
  * @author Ralf Teusner and Tom Staubitz
  *
  */
@@ -24,8 +26,11 @@ public abstract class Circle extends CollisionObject {
 	/**
 	 * Constructor to create the basis for a round object
 	 *
-	 * @param game Game reference to the game that provides access to the Processing features
-	 * @param position Position x,y position of the Object
+	 * @param game
+	 *            Game reference to the game that provides access to the
+	 *            Processing features
+	 * @param position
+	 *            Position x,y position of the Object
 	 * @param dimension
 	 */
 	public Circle(final Game game) {
@@ -33,8 +38,11 @@ public abstract class Circle extends CollisionObject {
 	}
 
 	/**
-	 * Default constructor to create a round object with a size 10,10 at the top left corner of the screen.
-	 * @param game Game
+	 * Default constructor to create a round object with a size 10,10 at the top
+	 * left corner of the screen.
+	 * 
+	 * @param game
+	 *            Game
 	 */
 	@Override
 	public void update(final Point position, final Dimension dimension) {
@@ -44,5 +52,15 @@ public abstract class Circle extends CollisionObject {
 
 	public int getRadius() {
 		return radius;
+	}
+
+	@Override
+	public String toString() {
+		final StringBuilder sb = new StringBuilder();
+		sb.append(this.getClass().getSimpleName());
+		sb.append(" P: [").append(getXPosition()).append(",").append(getYPosition()).append("]");
+		sb.append(" - ");
+		sb.append(" D: [").append(getWidth()).append(",").append(getHeight()).append("]");
+		return sb.toString();
 	}
 }

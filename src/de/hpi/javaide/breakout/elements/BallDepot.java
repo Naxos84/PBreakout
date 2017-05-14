@@ -64,7 +64,7 @@ public class BallDepot implements Displayable, Measureable {
 
 	public Ball dispense() {
 		if (numberOfBalls > 0) {
-			final Ball ball = new Ball(game, new Point(GameConstants.SCREEN_X / 2, GameConstants.SCREEN_Y / 2));
+			final Ball ball = new Ball(game, new Point(GameConstants.SCREEN_X / 2, 400));
 			// final PVector v = new
 			// PVector(random.nextInt(GameConstants.SCREEN_X),
 			// random.nextInt(GameConstants.SCREEN_Y));

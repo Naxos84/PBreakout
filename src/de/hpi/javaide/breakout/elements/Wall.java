@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 
 import de.hpi.javaide.breakout.interfaces.Displayable;
 import de.hpi.javaide.breakout.starter.Game;
+import de.hpi.javaide.breakout.starter.GameConstants;
 
 /**
  * Blueprint for the Wall
@@ -22,14 +23,19 @@ public class Wall implements Displayable, Iterable<Brick> {
 	// TODO remove Brick when destroyed
 
 	private static final Logger LOGGER = Logger.getLogger(Wall.class.getPackage().getName());
-	Brick brick;
+	private static final int marginLeft = 5;
+	private static final int marginRight = 5;
+	private static final int marginTop = 5;
+	private static final int marginBottom = 500;
+	private static final int spacing = 4;
+
 	/**
 	 * Datastructure to keep the Bricks
 	 */
 	private final List<Brick> bricks = new ArrayList<>();
 
-	public Wall(final Game game, final int i, final int j) {
-		buildWall(game, i, j);
+	public Wall(final Game game, final int columns, final int rows) {
+		buildWall(game, columns, rows);
 	}
 
 	@Override
@@ -46,8 +52,24 @@ public class Wall implements Displayable, Iterable<Brick> {
 	 * @param rows
 	 */
 	private void buildWall(final Game game, final int columns, final int rows) {
-		bricks.add(new Brick(game, new Point(60, 60), new Dimension(150, 150)));
 		LOGGER.debug("Building Wall");
+		final int wallWidth = GameConstants.SCREEN_X - marginLeft - marginRight;
+		LOGGER.trace("WallWidht: " + wallWidth);
+		final int wallHeight = GameConstants.SCREEN_Y - marginTop - marginBottom;
+		LOGGER.trace("WallHeight: " + wallHeight);
+
+		final int columnWidth = wallWidth / columns;
+		final int rowHeight = wallHeight / rows;
+
+		for (int column = 0; column < columns; column++) {
+			for (int row = 0; row < rows; row++) {
+				final Brick brick = new Brick(game, new Point(marginLeft + spacing + column * columnWidth, marginTop + row * rowHeight),
+						new Dimension(columnWidth - spacing, rowHeight));
+				brick.coord = column + ":" + row;
+				LOGGER.debug("Adding Brick: " + brick + " to wall.");
+				bricks.add(brick);
+			}
+		}
 	}
 
 	@Override
@@ -55,6 +77,9 @@ public class Wall implements Displayable, Iterable<Brick> {
 		for (final Brick brick : bricks) {
 			brick.display();
 		}
+	}
 
+	public void removeBrick(final Brick brick) {
+		bricks.remove(brick);
 	}
 }

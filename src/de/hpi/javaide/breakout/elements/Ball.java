@@ -65,4 +65,5 @@ public class Ball extends Circle {
 	public float getSpeed() {
 		return SPEED;
 	}
+
 }

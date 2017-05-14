@@ -27,8 +27,8 @@ public class Game extends PApplet {
 	@Override
 	public void draw() {
 		background(0);
-		ScreenManager.getCurrentScreen().update();
 		ScreenManager.getCurrentScreen().display();
+		ScreenManager.getCurrentScreen().update();
 	}
 
 	// Interact with the mouse

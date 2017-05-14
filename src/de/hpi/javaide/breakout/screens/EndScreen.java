@@ -9,8 +9,9 @@ import de.hpi.javaide.breakout.elements.ui.Info;
 import de.hpi.javaide.breakout.starter.Game;
 
 /**
- * The Screen can be in three states, either the StartScreen, the GameScreen, or the EndScreen.
- * The game logic takes care, which of those is the currently active screen.
+ * The Screen can be in three states, either the StartScreen, the GameScreen, or
+ * the EndScreen. The game logic takes care, which of those is the currently
+ * active screen.
  *
  * @author Ralf Teusner and Tom Staubitz
  *
@@ -30,18 +31,19 @@ public class EndScreen extends Screen {
 
 	private EndScreen(final Game game) {
 		super(game);
-		init();
 	}
 
 	/**
-	 * EndScreen implements a "Lazy Instantiation" of the Singleton Design Patterns (Gang of Four)
-	 * This approach is not "Thread safe", but is sufficient for our current needs.
+	 * EndScreen implements a "Lazy Instantiation" of the Singleton Design
+	 * Patterns (Gang of Four) This approach is not "Thread safe", but is
+	 * sufficient for our current needs.
 	 *
-	 * Please, be aware that Singletons need to be handled with care.
-	 * There are various ways to implement them, all have there pros and cons.
-	 * In his book, Effective Java, Joshua Bloch recommends to create Singletons using an enum,
-	 * which is a language concept that we have not discussed here so far.
-	 * For those of you who want to go further we suggest to follow this recommendation at some point of time.
+	 * Please, be aware that Singletons need to be handled with care. There are
+	 * various ways to implement them, all have there pros and cons. In his
+	 * book, Effective Java, Joshua Bloch recommends to create Singletons using
+	 * an enum, which is a language concept that we have not discussed here so
+	 * far. For those of you who want to go further we suggest to follow this
+	 * recommendation at some point of time.
 	 *
 	 * @return the EndScreen
 	 */
@@ -55,9 +57,9 @@ public class EndScreen extends Screen {
 	}
 
 	/*
-	 * Currently, we are within the EndScreen.
-	 * The only action that is required here is to restart the game (switch back to the start screen.)
-	 * Of course you can add any additional features if you want to.
+	 * Currently, we are within the EndScreen. The only action that is required
+	 * here is to restart the game (switch back to the start screen.) Of course
+	 * you can add any additional features if you want to.
 	 */
 	@Override
 	public void init() {

@@ -14,6 +14,8 @@ public class Brick extends Rectangular {
 
 	private int hitPoints;
 
+	public String coord;
+
 	private static PImage[] images;
 
 	public Brick(final Game game, final Point position, final Dimension dimension) {
@@ -48,6 +50,17 @@ public class Brick extends Rectangular {
 
 	public void onHit() {
 		hitPoints--;
+	}
+
+	@Override
+	public String toString() {
+		final StringBuilder sb = new StringBuilder();
+		sb.append(this.getClass().getSimpleName());
+		sb.append(" P: [").append(getXPosition()).append(",").append(getYPosition()).append("]");
+		sb.append(" - ");
+		sb.append(" D: [").append(getWidth()).append(",").append(getHeight()).append("]");
+		sb.append(" C:[").append(coord).append("]");
+		return sb.toString();
 	}
 
 }

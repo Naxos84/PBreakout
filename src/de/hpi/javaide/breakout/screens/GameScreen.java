@@ -51,7 +51,6 @@ public class GameScreen extends Screen {
 
 	private GameScreen(final Game game) {
 		super(game);
-		init();
 	}
 
 	/**
@@ -87,7 +86,7 @@ public class GameScreen extends Screen {
 	public void init() {
 		ballDepot = new BallDepot(gameInstance);
 		paddle = new Paddle(gameInstance);
-		wall = new Wall(gameInstance, 6, 7);
+		wall = new Wall(gameInstance, 3, 1);
 		score = new Score(gameInstance);
 		timer = new Timer(gameInstance);
 		gameInstance.loop();
@@ -111,6 +110,8 @@ public class GameScreen extends Screen {
 	 */
 	@Override
 	public void display() {
+
+		wall.display();
 		ballDepot.display();
 		if (currentBall != null) {
 			currentBall.display();
@@ -121,7 +122,6 @@ public class GameScreen extends Screen {
 			}
 		}
 		paddle.display();
-		wall.display();
 		score.display();
 		timer.display();
 	}
@@ -185,6 +185,7 @@ public class GameScreen extends Screen {
 	}
 
 	public static void destroyCurrentBall(final Game game) {
+		LOGGER.debug("Destroying ball.");
 		getInstance(game).currentBall = null;
 	}
 }
