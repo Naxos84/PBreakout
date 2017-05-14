@@ -1,5 +1,8 @@
 package de.hpi.javaide.breakout.elements;
 
+import java.awt.Dimension;
+import java.awt.Point;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -16,36 +19,42 @@ import de.hpi.javaide.breakout.starter.Game;
  */
 public class Wall implements Displayable, Iterable<Brick> {
 
-	private static final Logger LOGGER = Logger.getLogger(Wall.class.getPackage().getName());
+	// TODO remove Brick when destroyed
 
+	private static final Logger LOGGER = Logger.getLogger(Wall.class.getPackage().getName());
+	Brick brick;
 	/**
 	 * Datastructure to keep the Bricks
 	 */
-	private List<Brick> bricks;
-
+	private final List<Brick> bricks = new ArrayList<>();
 
 	public Wall(final Game game, final int i, final int j) {
 		buildWall(game, i, j);
 	}
+
 	@Override
 	public Iterator<Brick> iterator() {
 		return bricks.iterator();
 	}
+
 	/**
-	 * Build the wall by putting the single bricks into their position
-	 * Hint: You might want to use one or two for-loops
+	 * Build the wall by putting the single bricks into their position Hint: You
+	 * might want to use one or two for-loops
 	 *
 	 * @param game
 	 * @param columns
 	 * @param rows
 	 */
 	private void buildWall(final Game game, final int columns, final int rows) {
+		bricks.add(new Brick(game, new Point(60, 60), new Dimension(150, 150)));
 		LOGGER.debug("Building Wall");
 	}
 
 	@Override
 	public void display() {
-		// TODO Auto-generated method stub
+		for (final Brick brick : bricks) {
+			brick.display();
+		}
 
 	}
 }

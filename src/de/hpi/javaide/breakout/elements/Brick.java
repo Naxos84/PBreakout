@@ -5,20 +5,49 @@ import java.awt.Point;
 
 import de.hpi.javaide.breakout.basics.Rectangular;
 import de.hpi.javaide.breakout.starter.Game;
+import processing.core.PImage;
 
 //TODO wichtige Attribute: Größe, Position, Abstand der Bricks untereinander
 //     Irgendwie muss ich herausbekommen ob der Stein noch existiert oder nicht.
 public class Brick extends Rectangular {
+	private static final int TOTAL_IMAGES = 3;
+
+	private int hitPoints;
+
+	private static PImage[] images;
 
 	public Brick(final Game game, final Point position, final Dimension dimension) {
+		this(game, position, dimension, TOTAL_IMAGES);
+	}
+
+	public Brick(final Game game, final Point position, final Dimension dimension, final int hitPoints) {
 		super(game, position, dimension);
-		// TODO Auto-generated constructor stub
+		if (images == null) {
+			initImages(game);
+		}
+		this.hitPoints = hitPoints;
+	}
+
+	private static void initImages(final Game game) {
+		images = new PImage[3];
+		images[0] = game.loadImage("resources\\Brick0.png");
+		images[1] = game.loadImage("resources\\Brick1.png");
+		images[2] = game.loadImage("resources\\Brick2.png");
 	}
 
 	@Override
 	public void display() {
-		// TODO Auto-generated method stub
+		if (hasHitPoints()) {
+			game.image(images[TOTAL_IMAGES - hitPoints], position.x, position.y, dimension.width, dimension.height);
+		}
+	}
 
+	public boolean hasHitPoints() {
+		return hitPoints > 0;
+	}
+
+	public void onHit() {
+		hitPoints--;
 	}
 
 }

@@ -57,6 +57,21 @@ public class CollisionLogic {
 		default:
 			break;
 		}
+		for (final Brick brick : wall) {
+			switch (checkCircelRectangleCollision(ball, brick)) {
+			case HORIZONTAL:
+				ball.bounceY();
+				brick.onHit();
+				break;
+			case VERTICAL:
+				ball.bounceX();
+				brick.onHit();
+				break;
+			case NONE:
+			default:
+				break;
+			}
+		}
 
 	}
 
