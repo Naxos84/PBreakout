@@ -86,7 +86,7 @@ public class GameScreen extends Screen {
 	public void init() {
 		ballDepot = new BallDepot(gameInstance);
 		paddle = new Paddle(gameInstance);
-		wall = new Wall(gameInstance, 6, 5);
+		wall = new Wall(gameInstance, 10, 5);
 		score = new Score(gameInstance);
 		timer = new Timer(gameInstance);
 		gameInstance.loop();
@@ -170,13 +170,6 @@ public class GameScreen extends Screen {
 	@Override
 	public void handleMouseDragged() {
 		paddle.move();
-	}
-
-	@Override
-	public void increaseScore(final int amount) {
-		// cheap trick to convert an int to a String
-		// (Hint: the update() Method expects an input argument of type String)
-		score.update(String.valueOf(amount));
 	}
 
 	@Override

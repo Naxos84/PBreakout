@@ -6,13 +6,13 @@ import de.hpi.javaide.breakout.interfaces.Updateable;
 import de.hpi.javaide.breakout.starter.Game;
 
 /**
- * Provides a common interface for all Screen classes, so that we can easily switch between the states of the Screen.
+ * Provides a common interface for all Screen classes, so that we can easily
+ * switch between the states of the Screen.
  *
  * @author Ralf Teusner and Tom Staubitz
  *
  */
-public abstract class Screen implements Initializable, Displayable, Updateable
-{
+public abstract class Screen implements Initializable, Displayable, Updateable {
 	public static final String START = "start";
 	public static final String GAME = "game";
 	public static final String END = "end";
@@ -26,9 +26,6 @@ public abstract class Screen implements Initializable, Displayable, Updateable
 	public abstract void handleKeyPressed(int key);
 
 	public void handleMouseDragged() {
-	}
-
-	public void increaseScore(final int amount) {
 	}
 
 	public abstract void handleMouseClick(int mouseX, int mouseY);

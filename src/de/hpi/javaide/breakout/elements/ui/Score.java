@@ -6,8 +6,6 @@ import de.hpi.javaide.breakout.starter.Game;
 
 public class Score extends UIObject {
 
-	private int points;
-
 	public Score(final Game game) {
 		super(game);
 	}
@@ -15,13 +13,12 @@ public class Score extends UIObject {
 	@Override
 	public void display() {
 		game.textFont(Font.getFont24());
-		game.text(points, 10, 30);
+		game.text(Game.getScore(), 10, 30);
 
 	}
 
 	@Override
 	public void update(final String input) {
-		points = Integer.parseInt(input);
 
 	}
 }

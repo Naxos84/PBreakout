@@ -24,7 +24,7 @@ public class Wall implements Displayable, Iterable<Brick> {
 	private static final int marginLeft = 5;
 	private static final int marginRight = 5;
 	private static final int marginTop = 5;
-	private static final int marginBottom = GameConstants.STARTPOSITION.y / 2 + 50;
+	private static final int marginBottom = GameConstants.SCREEN_Y / 2 + 50;
 	private static final int spacing = 4;
 
 	/**

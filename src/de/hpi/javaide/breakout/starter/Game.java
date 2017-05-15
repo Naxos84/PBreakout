@@ -12,6 +12,7 @@ import processing.event.MouseEvent;
 public class Game extends PApplet {
 
 	private static final Logger LOGGER = Logger.getLogger(Game.class.getPackage().getName());
+	private static int score;
 
 	// Setup the game
 	@Override
@@ -31,12 +32,6 @@ public class Game extends PApplet {
 		ScreenManager.getCurrentScreen().update();
 	}
 
-	// Interact with the mouse
-	@Override
-	public void mouseMoved() {
-
-	}
-
 	@Override
 	public void mouseDragged() {
 		ScreenManager.getCurrentScreen().handleMouseDragged();
@@ -50,19 +45,17 @@ public class Game extends PApplet {
 		}
 	}
 
-	// Interact with the keyboard
 	@Override
 	public void keyPressed() {
 		ScreenManager.getCurrentScreen().handleKeyPressed(keyCode);
 	}
 
-	@Override
-	public void keyReleased() {
-
+	public static void addToScore(final int score) {
+		Game.score += score;
 	}
 
-	public void increaseScore(final int i) {
-		ScreenManager.getCurrentScreen().increaseScore(i);
+	public static int getScore() {
+		return Game.score;
 	}
 
 }

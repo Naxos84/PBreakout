@@ -50,6 +50,7 @@ public class Brick extends Rectangular {
 
 	public void onHit() {
 		hitPoints--;
+		Game.addToScore(1);
 	}
 
 	@Override

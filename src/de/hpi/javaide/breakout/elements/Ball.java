@@ -22,7 +22,7 @@ import processing.core.PVector;
 // jemand wissen wollen in welche Richtung er fliegt.
 public class Ball extends Circle {
 
-	private static final int SPEED = 3;
+	private static final int SPEED = 6;
 
 	private final int red = 255;
 	private final int green = 0;
