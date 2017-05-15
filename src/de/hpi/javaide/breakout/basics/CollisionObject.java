@@ -1,8 +1,8 @@
 package de.hpi.javaide.breakout.basics;
 
 import java.awt.Dimension;
-import java.awt.Point;
 import java.awt.Shape;
+import java.awt.geom.Point2D;
 
 import de.hpi.javaide.breakout.interfaces.Collidable;
 import de.hpi.javaide.breakout.interfaces.Colorable;
@@ -10,8 +10,8 @@ import de.hpi.javaide.breakout.interfaces.Displayable;
 import de.hpi.javaide.breakout.starter.Game;
 
 /**
- * Base class to build collidable objects from.
- * Provides the required basis for Elliptics and Rectangulars
+ * Base class to build collidable objects from. Provides the required basis for
+ * Elliptics and Rectangulars
  *
  * @author Ralf Teusner and Tom Staubitz
  *
@@ -33,18 +33,24 @@ public abstract class CollisionObject implements Collidable, Displayable, Colora
 	/**
 	 * the x,y position of an object
 	 */
-	protected Point position;
+	protected Point2D.Float position;
 	/**
 	 * the color of the object
 	 */
 	private Color color;
+
 	/**
-	 * Constructor. Initializes the reference to the Game, the size and the position of the object
-	 * @param game Game, access to the Processing features
-	 * @param position Position, the x,y coordinates
-	 * @param dimension Dimension, the width and height of the object
+	 * Constructor. Initializes the reference to the Game, the size and the
+	 * position of the object
+	 *
+	 * @param game
+	 *            Game, access to the Processing features
+	 * @param position
+	 *            Position, the x,y coordinates
+	 * @param dimension
+	 *            Dimension, the width and height of the object
 	 */
-	public CollisionObject(final Game game, final Point position, final Dimension dimension) {
+	public CollisionObject(final Game game, final Point2D.Float position, final Dimension dimension) {
 		this.game = game;
 		this.position = position;
 		this.dimension = dimension;
@@ -66,7 +72,7 @@ public abstract class CollisionObject implements Collidable, Displayable, Colora
 	}
 
 	@Override
-	public int getXPosition() {
+	public float getXPosition() {
 		return position.x;
 	}
 
@@ -75,7 +81,7 @@ public abstract class CollisionObject implements Collidable, Displayable, Colora
 	}
 
 	@Override
-	public int getYPosition() {
+	public float getYPosition() {
 		return position.y;
 	}
 
@@ -109,7 +115,7 @@ public abstract class CollisionObject implements Collidable, Displayable, Colora
 	}
 
 	@Override
-	public void update(final Point position, final Dimension dimension) {
+	public void update(final Point2D.Float position, final Dimension dimension) {
 		this.position = position;
 		this.dimension = dimension;
 	}

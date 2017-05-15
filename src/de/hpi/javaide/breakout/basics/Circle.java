@@ -1,15 +1,15 @@
 package de.hpi.javaide.breakout.basics;
 
 import java.awt.Dimension;
-import java.awt.Point;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Point2D;
 
 import de.hpi.javaide.breakout.starter.Game;
 
 /**
  * Extends the CollisionObject to provide the basis for the round collidable
  * Elements, such as the Ball
- * 
+ *
  * @author Ralf Teusner and Tom Staubitz
  *
  */
@@ -17,7 +17,7 @@ public abstract class Circle extends CollisionObject {
 
 	private final int radius;
 
-	public Circle(final Game game, final Point position, final int radius) {
+	public Circle(final Game game, final Point2D.Float position, final int radius) {
 		super(game, position, new Dimension(radius, radius));
 		this.radius = radius;
 		geometry = new Ellipse2D.Float(getXPosition(), getYPosition(), radius, radius);
@@ -34,18 +34,18 @@ public abstract class Circle extends CollisionObject {
 	 * @param dimension
 	 */
 	public Circle(final Game game) {
-		this(game, new Point(0, 0), 10);
+		this(game, new Point2D.Float(0, 0), 10);
 	}
 
 	/**
 	 * Default constructor to create a round object with a size 10,10 at the top
 	 * left corner of the screen.
-	 * 
+	 *
 	 * @param game
 	 *            Game
 	 */
 	@Override
-	public void update(final Point position, final Dimension dimension) {
+	public void update(final Point2D.Float position, final Dimension dimension) {
 		super.update(position, dimension);
 		((Ellipse2D) getGeometry()).setFrame(getXPosition(), getYPosition(), getWidth(), getHeight());
 	}

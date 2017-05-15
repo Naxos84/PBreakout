@@ -1,6 +1,6 @@
 package de.hpi.javaide.breakout.elements;
 
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.Random;
 
 import de.hpi.javaide.breakout.interfaces.Displayable;
@@ -29,12 +29,12 @@ public class BallDepot implements Displayable, Measureable {
 	}
 
 	@Override
-	public int getXPosition() {
+	public float getXPosition() {
 		return 50;
 	}
 
 	@Override
-	public int getYPosition() {
+	public float getYPosition() {
 		return 50;
 	}
 
@@ -64,7 +64,7 @@ public class BallDepot implements Displayable, Measureable {
 
 	public Ball dispense() {
 		if (numberOfBalls > 0) {
-			final Ball ball = new Ball(game, new Point(GameConstants.SCREEN_X / 2, 400));
+			final Ball ball = new Ball(game, new Point2D.Float(GameConstants.STARTPOSITION.x, GameConstants.STARTPOSITION.y));
 			// final PVector v = new
 			// PVector(random.nextInt(GameConstants.SCREEN_X),
 			// random.nextInt(GameConstants.SCREEN_Y));

@@ -1,7 +1,7 @@
 package de.hpi.javaide.breakout.elements;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 
 import de.hpi.javaide.breakout.basics.Rectangular;
 import de.hpi.javaide.breakout.starter.Game;
@@ -18,11 +18,11 @@ public class Brick extends Rectangular {
 
 	private static PImage[] images;
 
-	public Brick(final Game game, final Point position, final Dimension dimension) {
+	public Brick(final Game game, final Point2D.Float position, final Dimension dimension) {
 		this(game, position, dimension, TOTAL_IMAGES);
 	}
 
-	public Brick(final Game game, final Point position, final Dimension dimension, final int hitPoints) {
+	public Brick(final Game game, final Point2D.Float position, final Dimension dimension, final int hitPoints) {
 		super(game, position, dimension);
 		if (images == null) {
 			initImages(game);

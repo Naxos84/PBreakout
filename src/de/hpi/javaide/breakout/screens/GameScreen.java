@@ -86,7 +86,7 @@ public class GameScreen extends Screen {
 	public void init() {
 		ballDepot = new BallDepot(gameInstance);
 		paddle = new Paddle(gameInstance);
-		wall = new Wall(gameInstance, 3, 1);
+		wall = new Wall(gameInstance, 6, 5);
 		score = new Score(gameInstance);
 		timer = new Timer(gameInstance);
 		gameInstance.loop();

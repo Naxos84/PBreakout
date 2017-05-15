@@ -64,18 +64,21 @@ public class CollisionLogic {
 			final Brick brick = iterator.next();
 			switch (checkCircelRectangleCollision(ball, brick)) {
 			case HORIZONTAL:
+				LOGGER.trace(ball + " collided with " + brick);
 				ball.bounceY();
 				brick.onHit();
-				iterator.remove();
 				break;
 			case VERTICAL:
+				LOGGER.trace(ball + " collided with " + brick);
 				ball.bounceX();
 				brick.onHit();
-				iterator.remove();
 				break;
 			case NONE:
 			default:
 				break;
+			}
+			if (!brick.hasHitPoints()) {
+				iterator.remove();
 			}
 		}
 
@@ -85,8 +88,8 @@ public class CollisionLogic {
 		// Collision logic taken from
 		// http://www.jeffreythompson.org/collision-detection/circle-rect.php
 		LOGGER.trace("Checking Collistion between " + circle + " and " + rect);
-		int testX = circle.getXPosition();
-		int testY = circle.getYPosition();
+		float testX = circle.getXPosition();
+		float testY = circle.getYPosition();
 		RectangularEdge collidedRectEdge = RectangularEdge.NONE;
 
 		if (circle.getXPosition() < rect.getXPosition()) {
@@ -103,7 +106,7 @@ public class CollisionLogic {
 			testY = rect.getYPosition(); // top edge
 			collidedRectEdge = RectangularEdge.HORIZONTAL;
 			LOGGER.trace("Collision could be top edge");
-		} else if (circle.getYPosition() > rect.getXPosition() + rect.getHeight()) {
+		} else if (circle.getYPosition() > rect.getYPosition() + rect.getHeight()) {
 			testY = rect.getYPosition() + rect.getHeight(); // bottom edge
 			collidedRectEdge = RectangularEdge.HORIZONTAL;
 			LOGGER.trace("Collision could be bottom edge");
@@ -112,13 +115,13 @@ public class CollisionLogic {
 		LOGGER.trace("testX: " + testX);
 		LOGGER.trace("testY: " + testY);
 
-		final int distX = circle.getXPosition() - testX;
+		final float distX = circle.getXPosition() - testX;
 		LOGGER.trace("distX: " + distX);
-		final int distY = circle.getYPosition() - testY;
+		final float distY = circle.getYPosition() - testY;
 		LOGGER.trace("distY " + distY);
 
-		final float distance = PApplet.sqrt((float) (distX * distX) + (distY * distY));
-
+		final float distance = PApplet.sqrt(distX * distX + (distY * distY));
+		LOGGER.trace("Distance between " + circle + " and " + rect + " is " + distance);
 		if (distance < circle.getRadius()) {
 			LOGGER.debug(circle + " and " + rect + " collided --> " + collidedRectEdge);
 			LOGGER.debug("distance: " + distance + " radius: " + circle.getRadius());

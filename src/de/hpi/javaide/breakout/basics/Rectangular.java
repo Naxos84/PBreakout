@@ -1,7 +1,7 @@
 package de.hpi.javaide.breakout.basics;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
 import de.hpi.javaide.breakout.starter.Game;
@@ -9,7 +9,7 @@ import de.hpi.javaide.breakout.starter.Game;
 /**
  * Extends the CollisionObject to provide the basis for the rectangular
  * collidable Elements, such as the Paddle or a Brick.
- * 
+ *
  * @author Ralf Teusner and Tom Staubitz
  *
  */
@@ -25,13 +25,13 @@ public abstract class Rectangular extends CollisionObject {
 	 *            Position x,y position of the Object
 	 * @param dimension
 	 */
-	public Rectangular(final Game game, final Point position, final Dimension dimension) {
+	public Rectangular(final Game game, final Point2D.Float position, final Dimension dimension) {
 		super(game, position, dimension);
 		geometry = new Rectangle2D.Float(getXPosition(), getYPosition(), getWidth(), getHeight());
 	}
 
 	@Override
-	public void update(final Point position, final Dimension dimension) {
+	public void update(final Point2D.Float position, final Dimension dimension) {
 		super.update(position, dimension);
 		((Rectangle2D) getGeometry()).setFrame(getXPosition(), getYPosition(), getWidth(), getHeight());
 	}

@@ -1,6 +1,6 @@
 package de.hpi.javaide.breakout.elements;
 
-import java.awt.Point;
+import java.awt.geom.Point2D;
 
 import de.hpi.javaide.breakout.basics.Circle;
 import de.hpi.javaide.breakout.starter.Game;
@@ -30,7 +30,7 @@ public class Ball extends Circle {
 
 	private PVector vector;
 
-	public Ball(final Game game, final Point position) {
+	public Ball(final Game game, final Point2D.Float position) {
 		super(game, position, 10);
 		vector = new PVector();
 		vector.set(1, 1);
