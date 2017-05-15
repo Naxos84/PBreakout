@@ -84,6 +84,29 @@ public class CollisionLogic {
 
 	}
 
+	// For later use
+	// private static PVector getPaddleSectionOfCollision(final Ball ball, final
+	// Paddle paddle) {
+	// final Point2D.Float ballCenter = new Point2D.Float(ball.getXPosition(),
+	// ball.getYPosition());
+	// final float halfPaddleWidth = paddle.getWidth() / 2;
+	//
+	// final float localXCollision = ballCenter.x - paddle.getXPosition();
+	//
+	// // has a value between 0 and paddle.getWith() / 2
+	// final float collisionXOffSetFromPaddleCenter = localXCollision -
+	// halfPaddleWidth;
+	//
+	// // has a value between -1 and 1
+	// final float percentage = collisionXOffSetFromPaddleCenter /
+	// halfPaddleWidth;
+	// if (percentage < -1 || percentage > 1) {
+	// LOGGER.error("Error when calculating new Vector for ball");
+	// }
+	//
+	// return new PVector(2 * percentage, 1);
+	// }
+
 	private static RectangularEdge checkCircelRectangleCollision(final Circle circle, final Rectangular rect) {
 		// Collision logic taken from
 		// http://www.jeffreythompson.org/collision-detection/circle-rect.php
