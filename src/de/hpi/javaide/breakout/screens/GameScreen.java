@@ -1,6 +1,7 @@
 package de.hpi.javaide.breakout.screens;
 
 import java.awt.event.KeyEvent;
+import java.awt.geom.Point2D;
 
 import org.apache.log4j.Logger;
 
@@ -10,9 +11,12 @@ import de.hpi.javaide.breakout.elements.BallDepot;
 import de.hpi.javaide.breakout.elements.CollisionLogic;
 import de.hpi.javaide.breakout.elements.Paddle;
 import de.hpi.javaide.breakout.elements.Wall;
+import de.hpi.javaide.breakout.elements.ui.Info;
 import de.hpi.javaide.breakout.elements.ui.Score;
-import de.hpi.javaide.breakout.elements.ui.Timer;
+import de.hpi.javaide.breakout.interfaces.Pauseable;
 import de.hpi.javaide.breakout.starter.Game;
+import de.hpi.javaide.breakout.starter.GameConstants;
+import processing.data.XML;
 
 /**
  * The Screen can be in three states, either the StartScreen, the GameScreen, or
@@ -22,7 +26,7 @@ import de.hpi.javaide.breakout.starter.Game;
  * @author Ralf Teusner and Tom Staubitz
  *
  */
-public class GameScreen extends Screen {
+public class GameScreen extends Screen implements Pauseable {
 
 	private static final Logger LOGGER = Logger.getLogger(Game.class.getPackage().getName());
 
@@ -30,6 +34,7 @@ public class GameScreen extends Screen {
 	 * This variable is needed for the Singleton pattern
 	 */
 	private static GameScreen instance;
+	private boolean isPaused;
 
 	/**
 	 * As we are in the actual game now, we need all the elements that are part
@@ -46,8 +51,9 @@ public class GameScreen extends Screen {
 	/**
 	 * Plus some UIObjects to display the score and the timer
 	 */
-	private UIObject score;
-	private UIObject timer;
+	private UIObject<String> score;
+	// private UIObject timer;
+	private Info pauseInfo;
 
 	private GameScreen(final Game game) {
 		super(game);
@@ -86,9 +92,13 @@ public class GameScreen extends Screen {
 	public void init() {
 		ballDepot = new BallDepot(gameInstance);
 		paddle = new Paddle(gameInstance);
-		wall = new Wall(gameInstance, 10, 5);
+		final XML config = gameInstance.loadXML("config.xml");
+		final XML wallConfig = config.getChild("wallConfiguration");
+		wall = new Wall(gameInstance, wallConfig);
 		score = new Score(gameInstance);
-		timer = new Timer(gameInstance);
+		// timer = new Timer(gameInstance);
+		pauseInfo = new Info(gameInstance, "Game is paused.");
+		pauseInfo.setPosition(new Point2D.Float(GameConstants.SCREEN_X / 2f - pauseInfo.getFontWidth() / 2, (float) GameConstants.SCREEN_Y / 2));
 		gameInstance.loop();
 	}
 
@@ -101,7 +111,7 @@ public class GameScreen extends Screen {
 			currentBall.move();
 			CollisionLogic.checkCollision(gameInstance, currentBall, paddle, wall);
 		}
-		timer.update(null);
+		// timer.update(null);
 	}
 
 	/**
@@ -123,7 +133,7 @@ public class GameScreen extends Screen {
 		}
 		paddle.display();
 		score.display();
-		timer.display();
+		// timer.display();
 	}
 
 	/**
@@ -180,5 +190,24 @@ public class GameScreen extends Screen {
 	public static void destroyCurrentBall(final Game game) {
 		LOGGER.debug("Destroying ball.");
 		getInstance(game).currentBall = null;
+	}
+
+	@Override
+	public void pause() {
+		isPaused = true;
+		pauseInfo.display();
+		gameInstance.noLoop();
+
+	}
+
+	@Override
+	public void unpause() {
+		isPaused = false;
+		gameInstance.loop();
+	}
+
+	@Override
+	public boolean isPaused() {
+		return isPaused;
 	}
 }

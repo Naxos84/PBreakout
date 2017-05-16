@@ -32,9 +32,9 @@ public class Brick extends Rectangular {
 
 	private static void initImages(final Game game) {
 		images = new PImage[3];
-		images[0] = game.loadImage("resources\\Brick0.png");
-		images[1] = game.loadImage("resources\\Brick1.png");
-		images[2] = game.loadImage("resources\\Brick2.png");
+		images[0] = game.loadImage("resources\\images\\Brick0.png");
+		images[1] = game.loadImage("resources\\images\\Brick1.png");
+		images[2] = game.loadImage("resources\\images\\Brick2.png");
 	}
 
 	@Override

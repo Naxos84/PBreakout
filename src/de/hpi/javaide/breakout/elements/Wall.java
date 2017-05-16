@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import de.hpi.javaide.breakout.interfaces.Displayable;
 import de.hpi.javaide.breakout.starter.Game;
 import de.hpi.javaide.breakout.starter.GameConstants;
+import processing.data.XML;
 
 /**
  * Blueprint for the Wall
@@ -27,12 +28,17 @@ public class Wall implements Displayable, Iterable<Brick> {
 	private static final int marginBottom = GameConstants.SCREEN_Y / 2 + 50;
 	private static final int spacing = 4;
 
+	private static final String DEFAULT_COLUMS = "10";
+	private static final String DEFAULT_ROWS = "5";
+
 	/**
 	 * Datastructure to keep the Bricks
 	 */
 	private final List<Brick> bricks = new ArrayList<>();
 
-	public Wall(final Game game, final int columns, final int rows) {
+	public Wall(final Game game, final XML wallConfig) {
+		final int columns = Integer.parseInt(wallConfig.getChild("columns").getContent(DEFAULT_COLUMS));
+		final int rows = Integer.parseInt(wallConfig.getChild("rows").getContent(DEFAULT_ROWS));
 		buildWall(game, columns, rows);
 	}
 

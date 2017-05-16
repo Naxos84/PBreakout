@@ -1,8 +1,11 @@
 package de.hpi.javaide.breakout.starter;
 
+import java.awt.event.KeyEvent;
+
 import org.apache.log4j.Logger;
 
-import de.hpi.javaide.breakout.basics.Font;
+import de.hpi.javaide.breakout.basics.GameFont;
+import de.hpi.javaide.breakout.interfaces.Pauseable;
 import de.hpi.javaide.breakout.screens.Screen;
 import de.hpi.javaide.breakout.screens.ScreenManager;
 import processing.core.PApplet;
@@ -20,7 +23,7 @@ public class Game extends PApplet {
 		size(GameConstants.SCREEN_X, GameConstants.SCREEN_Y);
 		background(0);
 		frameRate(30);
-		Font.init(this);
+		GameFont.init(this);
 		ScreenManager.setScreen(this, Screen.START);
 	}
 
@@ -47,7 +50,29 @@ public class Game extends PApplet {
 
 	@Override
 	public void keyPressed() {
-		ScreenManager.getCurrentScreen().handleKeyPressed(keyCode);
+		final Screen screen = ScreenManager.getCurrentScreen();
+		screen.handleKeyPressed(keyCode);
+		if (keyCode == KeyEvent.VK_ESCAPE) {
+			if (screen instanceof Pauseable) {
+				final Pauseable pauseable = (Pauseable) screen;
+				if (pauseable.isPaused()) {
+					pauseable.unpause();
+				} else {
+					pauseable.pause();
+				}
+			}
+			trapEscKey();
+		} else if (keyCode == KeyEvent.VK_Q) {
+			// pressing "Q" quits the game
+			exit();
+		}
+
+	}
+
+	private void trapEscKey() {
+		// trap ESC so it doesn't quit the game
+		keyCode = 0;
+		key = '\0';
 	}
 
 	public static void addToScore(final int score) {
