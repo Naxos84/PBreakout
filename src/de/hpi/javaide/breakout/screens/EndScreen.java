@@ -27,7 +27,7 @@ public class EndScreen extends Screen {
 	/**
 	 * A UIObject to display some information
 	 */
-	private UIObject infoBox;
+	private UIObject<String> infoBox;
 
 	private EndScreen(final Game game) {
 		super(game);
@@ -71,7 +71,7 @@ public class EndScreen extends Screen {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
+		// not needed yet
 
 	}
 

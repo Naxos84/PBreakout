@@ -8,14 +8,14 @@ import java.awt.geom.Point2D;
  * Interface for objects that might collide. Can set their internal state
  * (position, dimension) via update and return their geometry as a @Shape
  * object.
- * 
+ *
  * @author Ralf Teusner and Tom Staubitz
  *
  */
 public interface Collidable extends Measureable {
 	/**
 	 * Combined setter for position and dimension.
-	 * 
+	 *
 	 * @param position
 	 *            Position, consisting of x and y values.
 	 * @param dimension

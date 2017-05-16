@@ -22,9 +22,13 @@ public class Color implements Colorable {
 
 	/**
 	 * Constructor to create a color with the specified values
-	 * @param red red portion of the color 0-255
-	 * @param green green portion of the color 0-255
-	 * @param blue blue portion of the color 0-255
+	 * 
+	 * @param red
+	 *            red portion of the color 0-255
+	 * @param green
+	 *            green portion of the color 0-255
+	 * @param blue
+	 *            blue portion of the color 0-255
 	 */
 	public Color(final int red, final int green, final int blue) {
 		if (red < 0 || red > 255) {

@@ -141,28 +141,9 @@ public class GameScreen extends Screen implements Pauseable {
 	 */
 	@Override
 	public void handleKeyPressed(final int key) {
-		switch (key) {
-		case KeyEvent.VK_ENTER:
+		if (key == KeyEvent.VK_ENTER) {
 			spawnBall();
-			break;
-		case KeyEvent.VK_LEFT:
-			movePaddleLeft();
-			break;
-		case KeyEvent.VK_RIGHT:
-			movePaddleRight();
-			break;
-		default:
-			break;
 		}
-	}
-
-	private void movePaddleLeft() {
-		paddle.moveRight();
-	}
-
-	private void movePaddleRight() {
-		paddle.moveRight();
-
 	}
 
 	private void spawnBall() {

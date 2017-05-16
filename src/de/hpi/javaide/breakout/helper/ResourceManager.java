@@ -5,7 +5,9 @@ import java.util.ResourceBundle;
 
 public class ResourceManager {
 
-	private static Locale locale = Locale.getDefault();
+	private ResourceManager() {
+
+	}
 
 	public static String getString(final String key) {
 		return getString(key, null);

@@ -7,8 +7,6 @@ import de.hpi.javaide.breakout.basics.Rectangular;
 import de.hpi.javaide.breakout.starter.Game;
 import processing.core.PImage;
 
-//TODO wichtige Attribute: Größe, Position, Abstand der Bricks untereinander
-//     Irgendwie muss ich herausbekommen ob der Stein noch existiert oder nicht.
 public class Brick extends Rectangular {
 	private static final int TOTAL_IMAGES = 3;
 

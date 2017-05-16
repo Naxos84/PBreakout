@@ -11,7 +11,7 @@ public interface Measureable {
 
 	/**
 	 * Make sure that measurable objects provide a way to get their x-position.
-	 * 
+	 *
 	 * @return the x-position as an integer
 	 */
 
@@ -19,7 +19,7 @@ public interface Measureable {
 
 	/**
 	 * Make sure that measurable objects provide a way to get their y-position.
-	 * 
+	 *
 	 * @return the y-position as an integer
 	 */
 	float getYPosition();

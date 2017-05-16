@@ -115,8 +115,7 @@ public class StartScreen extends Screen {
 	@Override
 	public void handleKeyPressed(final int key) {
 		menu.onKeyPress(key);
-		switch (key) {
-		case KeyEvent.VK_ENTER:
+		if (key == KeyEvent.VK_ENTER) {
 			switch (menu.getMenuSelection()) {
 			case START_SELECTION:
 				startGame();
@@ -130,9 +129,6 @@ public class StartScreen extends Screen {
 			default:
 				break;
 			}
-			break;
-		default:
-			break;
 		}
 	}
 

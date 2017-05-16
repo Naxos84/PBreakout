@@ -35,7 +35,7 @@ public class Menu extends UIObject<List<String>> {
 				game.fill(UNSELECTED.getRed(), UNSELECTED.getGreen(), UNSELECTED.getBlue());
 			}
 			final String text = ResourceManager.getString(keys.get(i));
-			game.text(text, GameConstants.SCREEN_X / 2 - GameFont.getTextWidth(text, font), 200 + i * GameFont.getTextHeight(text, font));
+			game.text(text, GameConstants.SCREEN_X / 2f - GameFont.getTextWidth(text, font), 200 + i * GameFont.getTextHeight(text, font));
 			game.fill(UNSELECTED.getRed(), UNSELECTED.getGreen(), UNSELECTED.getBlue());
 		}
 	}

@@ -19,6 +19,6 @@ public class Score extends UIObject<String> {
 
 	@Override
 	public void update(final String input) {
-
+		// score is self updating see display()
 	}
 }

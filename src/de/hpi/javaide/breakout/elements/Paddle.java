@@ -28,11 +28,6 @@ public class Paddle extends Rectangular {
 	}
 
 	public void move() {
-		update(new Point2D.Float(game.mouseX, getYPosition()), new Dimension(getWidth(), getHeight()));
-	}
-
-	public void moveRight() {
-		// TODO Auto-generated method stub
-
+		update(new Point2D.Float(game.mouseX - getWidth() / 2, getYPosition()), new Dimension(getWidth(), getHeight()));
 	}
 }

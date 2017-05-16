@@ -22,7 +22,7 @@ public class Timer extends UIObject<String> {
 
 	@Override
 	public void update(final String input) {
-		// TODO Auto-generated method stub
+		// timer is not implemented yet
 
 	}
 }

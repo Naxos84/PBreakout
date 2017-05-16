@@ -5,9 +5,6 @@ import de.hpi.javaide.breakout.basics.UIObject;
 import de.hpi.javaide.breakout.starter.Game;
 import processing.core.PFont;
 
-//TODO nach dem die fehlenden Methoden ergänzt wurden, muss hier noch ein Konstruktorparameter
-//     an das zugehörige Attribut übergeben werden.
-
 public class Info extends UIObject<String> {
 
 	private String content;

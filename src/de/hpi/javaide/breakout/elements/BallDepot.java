@@ -1,7 +1,6 @@
 package de.hpi.javaide.breakout.elements;
 
 import java.awt.geom.Point2D;
-import java.util.Random;
 
 import de.hpi.javaide.breakout.interfaces.Displayable;
 import de.hpi.javaide.breakout.interfaces.Measureable;
@@ -9,13 +8,11 @@ import de.hpi.javaide.breakout.starter.Game;
 import de.hpi.javaide.breakout.starter.GameConstants;
 import processing.core.PVector;
 
-//TODO hier werden wir sicher eine Collection brauchen um die Bälle unterzubringen.
-//     Vermutlich werden wir wissen wollen wann das Depot leer ist.
-//     Irgendwie müssen die Bälle an den Start gebracht werden.
 public class BallDepot implements Displayable, Measureable {
 
+	private static final Point2D.Float STARTPOSITION = new Point2D.Float(GameConstants.SCREEN_X / 2f, GameConstants.SCREEN_Y / 2f);
+
 	private final Game game;
-	private final Random random;
 	private int numberOfBalls;
 
 	public BallDepot(final Game game) {
@@ -24,7 +21,6 @@ public class BallDepot implements Displayable, Measureable {
 
 	public BallDepot(final Game game, final int numberOfBalls) {
 		this.game = game;
-		random = new Random();
 		this.numberOfBalls = numberOfBalls;
 	}
 
@@ -64,7 +60,7 @@ public class BallDepot implements Displayable, Measureable {
 
 	public Ball dispense() {
 		if (numberOfBalls > 0) {
-			final Ball ball = new Ball(game, new Point2D.Float(GameConstants.STARTPOSITION.x, GameConstants.STARTPOSITION.y));
+			final Ball ball = new Ball(game, STARTPOSITION);
 			// final PVector v = new
 			// PVector(random.nextInt(GameConstants.SCREEN_X),
 			// random.nextInt(GameConstants.SCREEN_Y));

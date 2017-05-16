@@ -3,6 +3,7 @@ package de.hpi.javaide.breakout.elements;
 import java.awt.geom.Point2D;
 
 import de.hpi.javaide.breakout.basics.Circle;
+import de.hpi.javaide.breakout.basics.Color;
 import de.hpi.javaide.breakout.starter.Game;
 import de.hpi.javaide.breakout.starter.GameConstants;
 import processing.core.PApplet;
@@ -14,19 +15,10 @@ import processing.core.PVector;
  * @author Ralf Teusner and Tom Staubitz
  *
  */
-// TODO neben dem Ergänzen der vom Interface erwarteten Methoden,
-// sollte der Ball Eigenschaften wie Größe und Richtung mitbringen.
-// Richtung wird in der Regel als Vector definiert.
-// Vermutlich sollte er die Richtung ändern können und sehr wahrscheinlich
-// wird früher oder später
-// jemand wissen wollen in welche Richtung er fliegt.
 public class Ball extends Circle {
 
 	private static final int SPEED = 6;
-
-	private final int red = 255;
-	private final int green = 0;
-	private final int blue = 0;
+	private static final Color COLOR = new Color(255, 0, 0);
 
 	private PVector vector;
 
@@ -39,7 +31,7 @@ public class Ball extends Circle {
 
 	@Override
 	public void display() {
-		game.fill(red, green, blue);
+		game.fill(COLOR.getRed(), COLOR.getGreen(), COLOR.getBlue());
 		game.ellipseMode(PApplet.CENTER);
 		game.ellipse(position.x, position.y, getRadius(), getRadius());
 		game.fill(GameConstants.BACKGROUNDFILL);
