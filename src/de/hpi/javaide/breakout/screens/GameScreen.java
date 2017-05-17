@@ -13,6 +13,7 @@ import de.hpi.javaide.breakout.elements.Paddle;
 import de.hpi.javaide.breakout.elements.Wall;
 import de.hpi.javaide.breakout.elements.ui.Info;
 import de.hpi.javaide.breakout.elements.ui.Score;
+import de.hpi.javaide.breakout.helper.ResourceManager;
 import de.hpi.javaide.breakout.interfaces.Pauseable;
 import de.hpi.javaide.breakout.starter.Game;
 import de.hpi.javaide.breakout.starter.GameConstants;
@@ -29,6 +30,7 @@ import processing.data.XML;
 public class GameScreen extends Screen implements Pauseable {
 
 	private static final Logger LOGGER = Logger.getLogger(Game.class.getPackage().getName());
+	private static final String GAME_PAUSED_RESOURCE_KEY = "GAME_PAUSED";
 
 	/**
 	 * This variable is needed for the Singleton pattern
@@ -93,11 +95,13 @@ public class GameScreen extends Screen implements Pauseable {
 		ballDepot = new BallDepot(gameInstance);
 		paddle = new Paddle(gameInstance);
 		final XML config = gameInstance.loadXML("config.xml");
-		final XML wallConfig = config.getChild("wallConfiguration");
-		wall = new Wall(gameInstance, wallConfig);
+		if (config != null) {
+			final XML wallConfig = config.getChild("wallConfiguration");
+			wall = new Wall(gameInstance, wallConfig);
+		}
 		score = new Score(gameInstance);
 		// timer = new Timer(gameInstance);
-		pauseInfo = new Info(gameInstance, "Game is paused.");
+		pauseInfo = new Info(gameInstance, ResourceManager.getString(GAME_PAUSED_RESOURCE_KEY));
 		pauseInfo.setPosition(new Point2D.Float(GameConstants.SCREEN_X / 2f - pauseInfo.getFontWidth() / 2, (float) GameConstants.SCREEN_Y / 2));
 		gameInstance.loop();
 	}
@@ -110,6 +114,9 @@ public class GameScreen extends Screen implements Pauseable {
 		if (currentBall != null) {
 			currentBall.move();
 			CollisionLogic.checkCollision(gameInstance, currentBall, paddle, wall);
+		}
+		if (!wall.hasBricks()) {
+			ScreenManager.setScreen(gameInstance, Screen.END);
 		}
 		// timer.update(null);
 	}
@@ -168,6 +175,11 @@ public class GameScreen extends Screen implements Pauseable {
 		// do nothing
 	}
 
+	/**
+	 * zerstört den aktuellen Ball
+	 * 
+	 * @param game
+	 */
 	public static void destroyCurrentBall(final Game game) {
 		LOGGER.debug("Destroying ball.");
 		getInstance(game).currentBall = null;

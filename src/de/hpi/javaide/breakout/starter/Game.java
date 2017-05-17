@@ -30,7 +30,7 @@ public class Game extends PApplet {
 	// Update and draw everything in the game
 	@Override
 	public void draw() {
-		background(0);
+		background(GameConstants.BACKGROUNDFILL.getRed(), GameConstants.BACKGROUNDFILL.getGreen(), GameConstants.BACKGROUNDFILL.getBlue());
 		ScreenManager.getCurrentScreen().display();
 		ScreenManager.getCurrentScreen().update();
 	}

@@ -17,9 +17,9 @@ public interface Collidable extends Measureable {
 	 * Combined setter for position and dimension.
 	 *
 	 * @param position
-	 *            Position, consisting of x and y values.
+	 *            a {@link Point2D.Float} representing the Position
 	 * @param dimension
-	 *            Dimension representing width and height.
+	 *            a {@link Dimension} representing width and height.
 	 */
 	void update(Point2D.Float position, Dimension dimension);
 

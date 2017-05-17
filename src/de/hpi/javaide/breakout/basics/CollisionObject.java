@@ -44,11 +44,12 @@ public abstract class CollisionObject implements Collidable, Displayable, Colora
 	 * position of the object
 	 *
 	 * @param game
-	 *            Game, access to the Processing features
+	 *            a {@link Game}reference, to access the Processing features
 	 * @param position
-	 *            Position, the x,y coordinates
+	 *            a {@link Point2D.Float} representing the position
 	 * @param dimension
-	 *            Dimension, the width and height of the object
+	 *            a {@link Dimension}representing the width and height of the
+	 *            object
 	 */
 	public CollisionObject(final Game game, final Point2D.Float position, final Dimension dimension) {
 		this.game = game;
@@ -65,10 +66,6 @@ public abstract class CollisionObject implements Collidable, Displayable, Colora
 	@Override
 	public int getHeight() {
 		return dimension.height;
-	}
-
-	public Dimension getDimension() {
-		return dimension;
 	}
 
 	@Override
@@ -105,11 +102,6 @@ public abstract class CollisionObject implements Collidable, Displayable, Colora
 	}
 
 	@Override
-	public void setColor(final int r, final int g, final int b) {
-		color = new Color(r, g, b);
-	}
-
-	@Override
 	public Shape getGeometry() {
 		return geometry;
 	}
@@ -118,5 +110,10 @@ public abstract class CollisionObject implements Collidable, Displayable, Colora
 	public void update(final Point2D.Float position, final Dimension dimension) {
 		this.position = position;
 		this.dimension = dimension;
+	}
+
+	@Override
+	public void setColor(final Color color) {
+		this.color = color;
 	}
 }

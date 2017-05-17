@@ -7,10 +7,11 @@ import processing.core.PApplet;
 public class Main {
 
 	private Main() {
-
 	}
 
 	/**
+	 * the entry point of this application
+	 *
 	 * @param args
 	 */
 	public static void main(final String[] args) {

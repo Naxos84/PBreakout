@@ -18,6 +18,7 @@ public class Info extends UIObject<String> {
 	@Override
 	public void display() {
 		game.textFont(GameFont.getFont24());
+		game.fill(255);
 		game.text(content, xPosition, yPosition);
 	}
 
@@ -27,6 +28,10 @@ public class Info extends UIObject<String> {
 
 	}
 
+	/**
+	 *
+	 * @return the width of the text represented by this Info Box
+	 */
 	public float getFontWidth() {
 		return GameFont.getTextWidth(content, font);
 	}

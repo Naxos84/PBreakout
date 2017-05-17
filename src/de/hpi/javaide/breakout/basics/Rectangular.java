@@ -19,11 +19,13 @@ public abstract class Rectangular extends CollisionObject {
 	 * Constructor to create the basis for a rectangular object
 	 *
 	 * @param game
-	 *            Game reference to the game that provides access to the
-	 *            Processing features
+	 *            a {@link Game } reference to the game that provides access to
+	 *            the Processing features
 	 * @param position
-	 *            Position x,y position of the Object
+	 *            a {@link Point2D.Float}representing the position of the Object
 	 * @param dimension
+	 *            a {@link Dimension} representing width and height of the
+	 *            object
 	 */
 	public Rectangular(final Game game, final Point2D.Float position, final Dimension dimension) {
 		super(game, position, dimension);

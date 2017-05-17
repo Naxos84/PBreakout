@@ -6,8 +6,8 @@ import de.hpi.javaide.breakout.interfaces.Updateable;
 import de.hpi.javaide.breakout.starter.Game;
 
 /**
- * Provides a common interface for all Screen classes, so that we can easily
- * switch between the states of the Screen.
+ * Provides a common abstract class for all Screen classes, so that we can
+ * easily switch between the states of the Screen.
  *
  * @author Ralf Teusner and Tom Staubitz
  *

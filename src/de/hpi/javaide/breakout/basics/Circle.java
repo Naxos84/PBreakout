@@ -17,6 +17,18 @@ public abstract class Circle extends CollisionObject {
 
 	private final int radius;
 
+	/**
+	 * Constructor to create the basis for a round object
+	 *
+	 * @param game
+	 *            a {@link Game} reference to the game that provides access to
+	 *            the Processing features
+	 * @param position
+	 *            a {@link Point2D.Float} representing the position of this
+	 *            circle
+	 * @param radius
+	 *            the radius of the circle
+	 */
 	public Circle(final Game game, final Point2D.Float position, final int radius) {
 		super(game, position, new Dimension(radius, radius));
 		this.radius = radius;
@@ -24,32 +36,26 @@ public abstract class Circle extends CollisionObject {
 	}
 
 	/**
-	 * Constructor to create the basis for a round object
+	 * Constructs a default circle
 	 *
 	 * @param game
-	 *            Game reference to the game that provides access to the
-	 *            Processing features
-	 * @param position
-	 *            Position x,y position of the Object
-	 * @param dimension
+	 *            a {@link Game} reference to the game that provides access to
+	 *            the Processing features
 	 */
 	public Circle(final Game game) {
 		this(game, new Point2D.Float(0, 0), 10);
 	}
 
-	/**
-	 * Default constructor to create a round object with a size 10,10 at the top
-	 * left corner of the screen.
-	 *
-	 * @param game
-	 *            Game
-	 */
 	@Override
 	public void update(final Point2D.Float position, final Dimension dimension) {
 		super.update(position, dimension);
 		((Ellipse2D) getGeometry()).setFrame(getXPosition(), getYPosition(), getWidth(), getHeight());
 	}
 
+	/**
+	 *
+	 * @return the radius of the circle
+	 */
 	public int getRadius() {
 		return radius;
 	}

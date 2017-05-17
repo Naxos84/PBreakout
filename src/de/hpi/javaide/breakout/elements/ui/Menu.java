@@ -46,6 +46,12 @@ public class Menu extends UIObject<List<String>> {
 
 	}
 
+	/**
+	 * handle a pressed key
+	 * 
+	 * @param keyCode
+	 *            the keyCode of the pressed key
+	 */
 	public void onKeyPress(final int keyCode) {
 		switch (keyCode) {
 		case KeyEvent.VK_UP:
@@ -59,6 +65,10 @@ public class Menu extends UIObject<List<String>> {
 		}
 	}
 
+	/**
+	 *
+	 * @return the selection of this menu
+	 */
 	public int getMenuSelection() {
 		return menuSelection;
 	}

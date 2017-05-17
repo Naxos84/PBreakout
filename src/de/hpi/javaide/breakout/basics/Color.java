@@ -4,25 +4,31 @@ import de.hpi.javaide.breakout.interfaces.Colorable;
 
 public class Color implements Colorable {
 
+	public static final Color RED = new Color(255, 0, 0);
+	public static final Color GREEN = new Color(0, 255, 255);
+	public static final Color BLACK = new Color(0, 0, 0);
+	public static final Color WHITE = new Color(255, 255, 255);
+	public static final Color GREY = new Color(150, 150, 150);
+
 	/**
 	 * the components of the color
 	 */
-	private int red;
-	private int green;
-	private int blue;
+	private int r;
+	private int g;
+	private int b;
 
 	/**
 	 * default constructor to create a black color
 	 */
 	public Color() {
-		red = 0;
-		green = 0;
-		blue = 0;
+		r = 0;
+		g = 0;
+		b = 0;
 	}
 
 	/**
 	 * Constructor to create a color with the specified values
-	 * 
+	 *
 	 * @param red
 	 *            red portion of the color 0-255
 	 * @param green
@@ -38,14 +44,14 @@ public class Color implements Colorable {
 		} else if (blue < 0 || blue > 255) {
 			throw new IllegalArgumentException("The blue part of a color can only be between 0 and 255.");
 		}
-		this.red = red;
-		this.green = green;
-		this.blue = blue;
+		this.r = red;
+		this.g = green;
+		this.b = blue;
 	}
 
 	@Override
 	public int getRed() {
-		return red;
+		return r;
 	}
 
 	/**
@@ -55,12 +61,12 @@ public class Color implements Colorable {
 	 *            (0-255)
 	 */
 	public void setRed(final int red) {
-		this.red = red;
+		this.r = red;
 	}
 
 	@Override
 	public int getGreen() {
-		return green;
+		return g;
 	}
 
 	/**
@@ -70,12 +76,12 @@ public class Color implements Colorable {
 	 *            (0-255)
 	 */
 	public void setGreen(final int green) {
-		this.green = green;
+		this.g = green;
 	}
 
 	@Override
 	public int getBlue() {
-		return blue;
+		return b;
 	}
 
 	/**
@@ -85,13 +91,14 @@ public class Color implements Colorable {
 	 *            (0-255)
 	 */
 	public void setBlue(final int blue) {
-		this.blue = blue;
+		this.b = blue;
 	}
 
 	@Override
-	public void setColor(final int red, final int green, final int blue) {
-		setRed(red);
-		setGreen(green);
-		setBlue(blue);
+	public void setColor(final Color color) {
+		setRed(color.getRed());
+		setGreen(color.getGreen());
+		setBlue(color.getBlue());
+
 	}
 }

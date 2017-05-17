@@ -16,7 +16,7 @@ public class BallDepot implements Displayable, Measureable {
 	private int numberOfBalls;
 
 	public BallDepot(final Game game) {
-		this(game, 3);
+		this(game, GameConstants.BALLDEPOT_NUM_BALLS);
 	}
 
 	public BallDepot(final Game game, final int numberOfBalls) {
@@ -51,19 +51,20 @@ public class BallDepot implements Displayable, Measureable {
 			game.ellipse(getXPosition() + i * 10, getYPosition(), 5, 5);
 
 		}
-		game.fill(GameConstants.BACKGROUNDFILL);
 	}
 
 	public boolean isEmpty() {
 		return numberOfBalls <= 0;
 	}
 
+	/**
+	 * creates a ball and removes one ball from the ball depot
+	 * 
+	 * @return
+	 */
 	public Ball dispense() {
 		if (numberOfBalls > 0) {
 			final Ball ball = new Ball(game, STARTPOSITION);
-			// final PVector v = new
-			// PVector(random.nextInt(GameConstants.SCREEN_X),
-			// random.nextInt(GameConstants.SCREEN_Y));
 			final PVector v = new PVector(1, 1);
 			v.setMag(ball.getSpeed());
 			ball.setVector(v);

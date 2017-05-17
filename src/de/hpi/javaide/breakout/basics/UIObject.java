@@ -30,6 +30,7 @@ public abstract class UIObject<T> implements Displayable {
 	 * Constructor to pass the Game reference to the new UIobject
 	 *
 	 * @param game
+	 *            a {@link Game} for access to the processing features
 	 */
 	public UIObject(final Game game) {
 		this.game = game;
@@ -44,15 +45,26 @@ public abstract class UIObject<T> implements Displayable {
 	 * Method to update the contents of a UIObject
 	 *
 	 * @param input
-	 *            String the new content of the UIObject
+	 *            the new content of the UIObject
 	 */
 	public abstract void update(T input);
 
+	/**
+	 * sets the position of this UIObject
+	 *
+	 * @param position
+	 *            a {@link Point2D.Float} representing the position
+	 */
 	public void setPosition(final Point2D.Float position) {
 		xPosition = position.x;
 		yPosition = position.y;
 	}
 
+	/**
+	 * returns the position of this UIObject
+	 *
+	 * @return the position as {@link Point2D.Float}
+	 */
 	public Point2D.Float getPosition() {
 		return new Point2D.Float(xPosition, yPosition);
 	}

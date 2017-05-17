@@ -36,10 +36,31 @@ public class Wall implements Displayable, Iterable<Brick> {
 	 */
 	private final List<Brick> bricks = new ArrayList<>();
 
+	/**
+	 * Constructs a wall
+	 *
+	 * @param game
+	 *            a game Instance
+	 * @param wallConfig
+	 *            an {@link XML} element that was read from the config file
+	 */
 	public Wall(final Game game, final XML wallConfig) {
-		final int columns = Integer.parseInt(wallConfig.getChild("columns").getContent(DEFAULT_COLUMS));
-		final int rows = Integer.parseInt(wallConfig.getChild("rows").getContent(DEFAULT_ROWS));
-		buildWall(game, columns, rows);
+		final XML columnsConfig = wallConfig.getChild("columns");
+		final XML rowsConfig = wallConfig.getChild("rows");
+
+		if (columnsConfig != null && rowsConfig != null) {
+			try {
+				final int columns = Integer.parseInt(columnsConfig.getContent(DEFAULT_COLUMS));
+				final int rows = Integer.parseInt(rowsConfig.getContent(DEFAULT_ROWS));
+				buildWall(game, columns, rows);
+			} catch (final NumberFormatException e) {
+				LOGGER.error("Error reading values from wallConfig.", e);
+				buildWall(game, Integer.parseInt(DEFAULT_COLUMS), Integer.parseInt(DEFAULT_ROWS));
+			}
+		} else {
+			LOGGER.warn("Wall config invalid. Taking default Values");
+			buildWall(game, Integer.parseInt(DEFAULT_COLUMS), Integer.parseInt(DEFAULT_ROWS));
+		}
 	}
 
 	@Override
@@ -67,13 +88,15 @@ public class Wall implements Displayable, Iterable<Brick> {
 
 		for (int column = 0; column < columns; column++) {
 			for (int row = 0; row < rows; row++) {
-				final Brick brick = new Brick(game, new Point2D.Float(marginLeft + column * columnWidth, marginTop + row * rowHeight),
-						new Dimension(columnWidth - spacing, rowHeight - spacing));
-				brick.coord = column + ":" + row;
-				LOGGER.debug("Adding Brick: " + brick + " to wall.");
-				bricks.add(brick);
+				LOGGER.debug("Adding Brick: to wall.");
+				bricks.add(buildBrick(game, new Point2D.Float(marginLeft + column * columnWidth, marginTop + row * rowHeight),
+						new Dimension(columnWidth - spacing, rowHeight - spacing)));
 			}
 		}
+	}
+
+	private Brick buildBrick(final Game game, final Point2D.Float position, final Dimension dimension) {
+		return new Brick(game, position, dimension);
 	}
 
 	@Override
@@ -81,5 +104,15 @@ public class Wall implements Displayable, Iterable<Brick> {
 		for (final Brick brick : bricks) {
 			brick.display();
 		}
+	}
+
+	/**
+	 * checks wether this wall has bricks left
+	 * 
+	 * @return {@code true} if there is at least 1 brick left and
+	 *         {@code false otherwise}
+	 */
+	public boolean hasBricks() {
+		return !bricks.isEmpty();
 	}
 }

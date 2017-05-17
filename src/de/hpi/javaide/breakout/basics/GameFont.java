@@ -4,6 +4,7 @@ import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 
 import de.hpi.javaide.breakout.starter.Game;
+import de.hpi.javaide.breakout.starter.GameConstants;
 import processing.core.PFont;
 
 /**
@@ -14,6 +15,7 @@ import processing.core.PFont;
  *
  */
 public class GameFont {
+
 	private static PFont font16;
 	private static PFont font24;
 	private static PFont font32;
@@ -25,23 +27,44 @@ public class GameFont {
 	}
 
 	public static void init(final Game game) {
-		font16 = game.createFont("Arial Black Standard", 16);
-		font24 = game.createFont("Arial Black Standard", 24);
-		font32 = game.createFont("Arial Black Standard", 32);
+		font16 = game.createFont(GameConstants.DEFAULT_FONT, 16);
+		font24 = game.createFont(GameConstants.DEFAULT_FONT, 24);
+		font32 = game.createFont(GameConstants.DEFAULT_FONT, 32);
 	}
 
+	/**
+	 *
+	 * @return a default font with size 16
+	 */
 	public static PFont getFont16() {
 		return font16;
 	}
 
+	/**
+	 *
+	 * @return a default font with size 24
+	 */
 	public static PFont getFont24() {
 		return font24;
 	}
 
+	/**
+	 *
+	 * @return a default font with size 32
+	 */
 	public static PFont getFont32() {
 		return font32;
 	}
 
+	/**
+	 * Returns the width of the given {@link String} and the used {@link PFont}
+	 *
+	 * @param text
+	 *            the text of which the width should be calculated
+	 * @param pFont
+	 *            the font of the text
+	 * @return the calculated width of the text
+	 */
 	@SuppressWarnings("deprecation")
 	public static float getTextWidth(final String text, final PFont pFont) {
 		// I need to use this method. because an adequate Processing solution
@@ -49,6 +72,15 @@ public class GameFont {
 		return (int) pFont.getFont().getStringBounds(text, frc).getWidth();
 	}
 
+	/**
+	 * Returns the height of the given {@link String} and the used {@link PFont}
+	 *
+	 * @param text
+	 *            the text of which the height should be calculated
+	 * @param pFont
+	 *            the font of the text
+	 * @return the calculated height of the text
+	 */
 	@SuppressWarnings("deprecation")
 	public static float getTextHeight(final String text, final PFont pFont) {
 		// I need to use this method. because an adequate Processing solution

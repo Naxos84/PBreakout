@@ -1,5 +1,6 @@
 package de.hpi.javaide.breakout.elements.ui;
 
+import de.hpi.javaide.breakout.basics.Color;
 import de.hpi.javaide.breakout.basics.GameFont;
 import de.hpi.javaide.breakout.basics.UIObject;
 import de.hpi.javaide.breakout.starter.Game;
@@ -34,9 +35,16 @@ public class Button extends UIObject<String> {
 		text = input;
 	}
 
+	/**
+	 * sets the focus of this button. This is used for selecting them via the
+	 * keyboard
+	 *
+	 * @param isFocussed
+	 *            wether this button has focus or not
+	 */
 	public void setFocus(final boolean isFocussed) {
 		if (isFocussed) {
-			color.setColor(0, 255, 0);
+			color.setColor(Color.GREEN);
 		} else {
 			color = getDefaultColor();
 		}

@@ -12,8 +12,6 @@ public class Brick extends Rectangular {
 
 	private int hitPoints;
 
-	public String coord;
-
 	private static PImage[] images;
 
 	public Brick(final Game game, final Point2D.Float position, final Dimension dimension) {
@@ -42,10 +40,19 @@ public class Brick extends Rectangular {
 		}
 	}
 
+	/**
+	 * checks wether this brick has remaining hitPoints
+	 *
+	 * @return {@code true} if this Brick still has some hitPoints and
+	 *         {@code false} otherwise
+	 */
 	public boolean hasHitPoints() {
 		return hitPoints > 0;
 	}
 
+	/**
+	 * handle that this brick was hit
+	 */
 	public void onHit() {
 		hitPoints--;
 		Game.addToScore(1);
@@ -58,7 +65,6 @@ public class Brick extends Rectangular {
 		sb.append(" P: [").append(getXPosition()).append(",").append(getYPosition()).append("]");
 		sb.append(" - ");
 		sb.append(" D: [").append(getWidth()).append(",").append(getHeight()).append("]");
-		sb.append(" C:[").append(coord).append("]");
 		return sb.toString();
 	}
 

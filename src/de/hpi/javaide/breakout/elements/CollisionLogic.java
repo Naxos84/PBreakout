@@ -28,9 +28,13 @@ public class CollisionLogic {
 	 * the collidable elements on the screen. Paddle, Bricks, ...
 	 *
 	 * @param game
+	 *            a game instance
 	 * @param ball
+	 *            a ball instance
 	 * @param paddle
+	 *            a paddle instance
 	 * @param wall
+	 *            a wall instance
 	 */
 	public static void checkCollision(final Game game, final Ball ball, final Paddle paddle, final Wall wall) {
 		LOGGER.trace("Checking collisions");
@@ -125,28 +129,6 @@ public class CollisionLogic {
 		return RectangularEdge.NONE;
 
 	}
-
-	// private static boolean hasCollision(final CollisionObject o1, final
-	// CollisionObject o2) {
-	// if (checkX(o1, o2) && checkY(o1, o2)) {
-	// LOGGER.debug(o1 + "collided with" + o2);
-	// return true;
-	// } else {
-	// return false;
-	// }
-	// }
-	//
-	// private static boolean checkX(final CollisionObject o1, final
-	// CollisionObject o2) {
-	// return o1.getXPosition() >= o2.getXPosition() && o1.getXPosition() <=
-	// o2.getXPosition() + o2.getWidth();
-	// }
-	//
-	// private static boolean checkY(final CollisionObject o1, final
-	// CollisionObject o2) {
-	// return o1.getYPosition() >= o2.getYPosition() && o1.getYPosition() <=
-	// o2.getYPosition() + o2.getHeight();
-	// }
 
 	private enum RectangularEdge {
 		HORIZONTAL(), VERTICAL(), NONE();

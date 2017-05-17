@@ -3,7 +3,6 @@ package de.hpi.javaide.breakout.elements;
 import java.awt.geom.Point2D;
 
 import de.hpi.javaide.breakout.basics.Circle;
-import de.hpi.javaide.breakout.basics.Color;
 import de.hpi.javaide.breakout.starter.Game;
 import de.hpi.javaide.breakout.starter.GameConstants;
 import processing.core.PApplet;
@@ -17,13 +16,10 @@ import processing.core.PVector;
  */
 public class Ball extends Circle {
 
-	private static final int SPEED = 6;
-	private static final Color COLOR = new Color(255, 0, 0);
-
 	private PVector vector;
 
 	public Ball(final Game game, final Point2D.Float position) {
-		super(game, position, 10);
+		super(game, position, GameConstants.BALL_RADIUS);
 		vector = new PVector();
 		vector.set(1, 1);
 
@@ -31,12 +27,14 @@ public class Ball extends Circle {
 
 	@Override
 	public void display() {
-		game.fill(COLOR.getRed(), COLOR.getGreen(), COLOR.getBlue());
+		game.fill(GameConstants.BALL_COLOR.getRed(), GameConstants.BALL_COLOR.getGreen(), GameConstants.BALL_COLOR.getBlue());
 		game.ellipseMode(PApplet.CENTER);
 		game.ellipse(position.x, position.y, getRadius(), getRadius());
-		game.fill(GameConstants.BACKGROUNDFILL);
 	}
 
+	/**
+	 * moves the ball according to its vector
+	 */
 	public void move() {
 		position.x += vector.x;
 		position.y += vector.y;
@@ -55,7 +53,7 @@ public class Ball extends Circle {
 	}
 
 	public float getSpeed() {
-		return SPEED;
+		return GameConstants.BALL_SPEED;
 	}
 
 }

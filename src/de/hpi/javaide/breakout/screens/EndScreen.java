@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 
 import de.hpi.javaide.breakout.basics.UIObject;
 import de.hpi.javaide.breakout.elements.ui.Info;
+import de.hpi.javaide.breakout.helper.ResourceManager;
 import de.hpi.javaide.breakout.starter.Game;
 
 /**
@@ -19,6 +20,8 @@ import de.hpi.javaide.breakout.starter.Game;
 public class EndScreen extends Screen {
 
 	private static final Logger LOGGER = Logger.getLogger(EndScreen.class.getPackage().getName());
+	private static final String GAME_OVER_RESOURCE_KEY = "GAME_OVER";
+	private static final String RESTART_RESOURCE_KEY = "PRESS_ENTER_TO_RESTART";
 
 	/**
 	 * This variable is needed for the Singleton pattern
@@ -64,8 +67,8 @@ public class EndScreen extends Screen {
 	@Override
 	public void init() {
 		gameInstance.background(0);
-		String info = "Game over!!!\n";
-		info += "Press Enter to restart!\n";
+		String info = ResourceManager.getString(GAME_OVER_RESOURCE_KEY) + "\n";
+		info += ResourceManager.getString(RESTART_RESOURCE_KEY) + "\n";
 		infoBox = new Info(gameInstance, info);
 	}
 
