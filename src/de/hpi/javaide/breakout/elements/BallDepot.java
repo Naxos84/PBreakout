@@ -26,12 +26,12 @@ public class BallDepot implements Displayable, Measureable {
 
 	@Override
 	public float getXPosition() {
-		return 50;
+		return 10;
 	}
 
 	@Override
 	public float getYPosition() {
-		return 50;
+		return 40;
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class BallDepot implements Displayable, Measureable {
 
 	/**
 	 * creates a ball and removes one ball from the ball depot
-	 * 
+	 *
 	 * @return
 	 */
 	public Ball dispense() {

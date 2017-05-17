@@ -24,7 +24,7 @@ public class Wall implements Displayable, Iterable<Brick> {
 	private static final Logger LOGGER = Logger.getLogger(Wall.class.getPackage().getName());
 	private static final int marginLeft = 5;
 	private static final int marginRight = 5;
-	private static final int marginTop = 5;
+	private static final int marginTop = 50;
 	private static final int marginBottom = GameConstants.SCREEN_Y / 2 + 50;
 	private static final int spacing = 4;
 
@@ -108,7 +108,7 @@ public class Wall implements Displayable, Iterable<Brick> {
 
 	/**
 	 * checks wether this wall has bricks left
-	 * 
+	 *
 	 * @return {@code true} if there is at least 1 brick left and
 	 *         {@code false otherwise}
 	 */
