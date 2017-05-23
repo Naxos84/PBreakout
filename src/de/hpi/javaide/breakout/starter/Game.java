@@ -1,7 +1,6 @@
 package de.hpi.javaide.breakout.starter;
 
 import java.awt.event.KeyEvent;
-
 import org.apache.log4j.Logger;
 
 import de.hpi.javaide.breakout.basics.GameFont;
@@ -81,6 +80,44 @@ public class Game extends PApplet {
 
 	public static int getScore() {
 		return Game.score;
+	}
+
+	public java.util.List<HighScore> readHighScore() {
+		final java.util.List<HighScore> result = new java.util.ArrayList<>();
+		final String[] highScores = loadStrings("highScore.txt");
+		for (final String highScoreEntry : highScores) {
+			final String[] splitEntry = highScoreEntry.split("=");
+			if (splitEntry.length != 2) {
+				//Eintrag ist nicht valide
+			} else {
+				final String name = splitEntry[0];
+				final String score = splitEntry[1];
+				result.add(new HighScore(name, score));
+			}
+		}
+		return result;
+	}
+
+	public void writeHighScore(final java.util.List<HighScore> highScores) {
+		final String[] hScores = new String[highScores.size()]; //Erstellt ein Array welches genug Platz hat
+		for (int i = 0; i < highScores.size(); i++) {
+			final String name = highScores.get(i).name;
+			final String score = highScores.get(i).score;
+			hScores[i] = name + "=" + score; //baut den Eintrag zusammen
+		}
+		saveStrings("highScore.txt", hScores);
+	}
+
+	public class HighScore {
+
+		//Diese beiden Variablen sind public, damit ich keine getter/setter schreiben muss
+		public String	name;
+		public String	score;
+
+		public HighScore(final String name, final String score) {
+			this.name = name;
+			this.score = score;
+		}
 	}
 
 }
