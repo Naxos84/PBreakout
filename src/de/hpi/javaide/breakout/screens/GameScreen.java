@@ -176,7 +176,7 @@ public class GameScreen extends Screen implements Pauseable {
 	}
 
 	/**
-	 * zerstört den aktuellen Ball
+	 * zerstï¿½rt den aktuellen Ball
 	 * 
 	 * @param game
 	 */

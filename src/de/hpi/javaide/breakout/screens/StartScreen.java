@@ -90,7 +90,7 @@ public class StartScreen extends Screen {
 	@Override
 	public void init() {
 		gameInstance.background(0);
-		final String info = "Nutze die Pfeiltasten um im Menü zu navigieren.\nMit Enter bestätigst du deine Auswahl.";
+		final String info = "Nutze die Pfeiltasten um im MenÃ¼ zu navigieren.\nMit Enter bestÃ¤tigst du deine Auswahl.";
 		infoBox = new Info(gameInstance, info);
 		infoBox.setPosition(new Point2D.Float(10, 24));
 		infoBox.display();
